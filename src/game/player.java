@@ -103,13 +103,21 @@ public class player {
 			}else if (commands[0].equalsIgnoreCase("help")) {
 				// Finish of this area with all the commands
 				System.out.println("Avalible commands:"
-						+ "\n\t Go"
+						+ "\n\tGo"
 						+ "\n\tGrab"
-						+ "\n\nUse"
-						+ "\n\nInventory"
+						+ "\n\tUse"
+						+ "\n\tInventory"
+						+"\n\tLook"
 						);
 			}else if (commands[0].equalsIgnoreCase("look")) {
-				System.out.println("TODO");
+				System.out.println();
+				for (int i = 0; i < map.returnInventory().length(); i++) {
+					System.out.print(map.returnInventory().get(i).name());
+				}
+				if (map.returnInventory().length() == 0) {
+					System.out.println("The room you are in is very empty, there it no point looking for more stuff.");
+				}
+				System.out.println();
 			}
 			else {
 				System.out.println("I don't know what " + commands[0]+ " means.");
