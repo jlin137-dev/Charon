@@ -8,7 +8,7 @@ public class Gamemain {
 		Scanner scanner = new Scanner(System.in);
 		player player = new player();
 		
-		story story = new story();
+		
 		TextAnimation textanimate = new TextAnimation();
 		
 		//System.out.print(TextAnimation.Logo());														//Show ascii QASMT logo
@@ -17,12 +17,9 @@ public class Gamemain {
 		//player.name = scanner.nextLine().trim();
 		//System.out.println("Welcome " + player.name + " to the land of QASMT.");
 		// Init the locations and story
-		story.init();
+		
 		// Game loop
 		while (player.alive || !(player.gameFinished)) {
-			// TODO fix later cuz i moved the map class
-			//story.readStory(map.currentLevel, player.playerLocation[0], player.playerLocation[1]);
-			//map.printMap();
 			player.action();
 			System.out.println("Player at " + String.valueOf(player.playerLocation[0]) + " " + String.valueOf(player.playerLocation[1]) + " this is for debugging if you see this Mr Venz it mean that someone forgot to remove it :)");
 			

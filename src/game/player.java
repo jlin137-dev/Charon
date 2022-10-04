@@ -9,6 +9,8 @@ public class player {
 	public String name;
 	
 	private map map = new map();
+	
+	story story = new story();
 	// Keeps tracks of how many actions the user has done
 	public int turn = 0;
 	
@@ -23,9 +25,15 @@ public class player {
 	// Game loop
 	public boolean alive = true;
 	public boolean gameFinished = false;
+	
+	public player(){
+		story.init();
+	}
 
 	
 	public void action() {
+		// Read what is happening TODO finish off the story and if there are any special locations
+		story.readStory(map.currentLevel, playerLocation[0], playerLocation[1]);
 		//Getting user input
 		Scanner scanner = new Scanner(System.in);
 		// Point to pass something into it
@@ -60,16 +68,6 @@ public class player {
 					}
 					
 					break;
-				case "up":
-					// Limit this
-					map.currentLevel++;
-					// There isn't much more places you can go
-					break;
-				case "down":
-					if (map.currentLevel > 0) {
-						map.currentLevel++;
-					}
-					break;
 				// Interaction
 				case "grab":
 					System.out.println(map.returnInventory().length());
@@ -98,12 +96,14 @@ public class player {
 				}
 			}
 		}else {
+			// This part needs to look better
 			if (commands[0].equalsIgnoreCase("inventory")) {
 				System.out.println(returnInventory());
 			}else if (commands[0].equalsIgnoreCase("help")) {
 				// Finish of this area with all the commands
 				System.out.println("Avalible commands:"
-						+ "\n\tGo"
+						+ "\n\tGo + [NESW]"
+						+"\n\tUp/ Down"
 						+ "\n\tGrab"
 						+ "\n\tUse"
 						+ "\n\tInventory"
@@ -118,6 +118,21 @@ public class player {
 					System.out.println("The room you are in is very empty, there it no point looking for more stuff.");
 				}
 				System.out.println();
+			}else if (commands[0].equals("up")) {
+				// Limit up properly
+				playerLocation[0] = 0;
+				playerLocation[1] = 0;
+				
+				map.currentLevel++;
+			}else if (commands[0].equals("down")) {
+				if (map.currentLevel > 0) {
+					playerLocation[0] = 0;
+					playerLocation[1] = 0;
+					
+					map.currentLevel--;
+				}else {
+					System.out.println("You can't go down your not a miner.");
+				}
 			}
 			else {
 				System.out.println("I don't know what " + commands[0]+ " means.");

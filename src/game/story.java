@@ -13,7 +13,9 @@ public class story {
 				// Leave empty if there is nothing storyLocations.put("0 1 0", "");
 	}
 	public void readStory(int level, int x, int y){
-		System.out.println(storyLocations.get(level +" " + x + " " + y));
+		if (storyLocations.get(level +" " + x + " " + y) != null) {
+			System.out.println(storyLocations.get(level +" " + x + " " + y));
+		}
 		// So that the text isn't too cramped together
 		System.out.println();
 	}
