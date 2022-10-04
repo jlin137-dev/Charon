@@ -2,6 +2,10 @@ package game;
 
 public class map {
 	
+	public map(){
+		this.init();
+	}
+	
 	public int currentLevel = 0;
 	// L block
 	public char[][] level0 = {
@@ -64,7 +68,19 @@ public class map {
 			{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
 			{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '}
 	};
+	
+	public Inventory level0Inventory = new Inventory(false);
+	public Inventory level1Inventory = new Inventory(false);
+	public Inventory level2Inventory = new Inventory(false);
+	public Inventory level3Inventory = new Inventory(false);
+	public Inventory level4Inventory = new Inventory(false);
 
+	public void init() {
+		// Add all the items and stuff
+		level0Inventory.add(new Item("Laptop".toLowerCase(), true, 99));
+	}
+
+	// Don't need it
 	public void printMap() {
 		char[][] level = returnLevel();
 		// Making a map border to make it look nice
@@ -109,6 +125,23 @@ public class map {
 			return level3;
 		case 4:
 			return level4;
+		default:
+			return null;
+		}
+	}
+	
+	public Inventory returnInventory() {
+		switch(currentLevel) {
+		case 0:
+			return level0Inventory;
+		case 1:
+			return level1Inventory;
+		case 2:
+			return level2Inventory;
+		case 3:
+			return level3Inventory;
+		case 4:
+			return level4Inventory;
 		default:
 			return null;
 		}

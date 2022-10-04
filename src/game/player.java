@@ -8,6 +8,7 @@ public class player {
 	// I'm sure you can figure out what this mean
 	public String name;
 	
+	private map map = new map();
 	// Keeps tracks of how many actions the user has done
 	public int turn = 0;
 	
@@ -15,9 +16,8 @@ public class player {
 	public int playerLevel = 0;
 	public int[] playerLocation = {0,0};
 	
-	public char[][] map;
+	public Inventory inventory = new Inventory(false);
 	
-	public String[] inventory = new String[25];
 	
 	// I'm sure you can figure out what these mean
 	// Game loop
@@ -36,7 +36,7 @@ public class player {
 		//Check for the action
 		if (commands.length > 1) {
 			if (commands[1] != null) {
-				switch(commands[0]) {
+				switch(commands[0].toLowerCase()) {
 				// Movement
 				case "go":
 				case "run":
@@ -60,22 +60,22 @@ public class player {
 					}
 					
 					break;
+				case "up":
+					// Limit this
+					map.currentLevel++;
+					// There isn't much more places you can go
+					break;
+				case "down":
+					if (map.currentLevel > 0) {
+						map.currentLevel++;
+					}
+					break;
 				// Interaction
 				case "grab":
-					// Check items around it function
-					// Need to make a function to return items around
-					// Make more readable cuz i can't even read it
-					String[] environment = {"knife", "glock"};
-					if (Arrays.stream(environment).anyMatch(commands[1]::equals)) {
+					System.out.println(map.returnInventory().length());
+					if (map.returnInventory().in(commands[1])) {
 						System.out.println("You grab " + commands[1] + " from the ground and put it in your inventory.");
-						int temp = 0;
-						for (int i = 0; i < inventory.length - 1; i++) {
-							if (inventory[i] == null) {
-								temp = i;
-								break;
-							};
-						}
-						inventory[temp] = commands[1];
+						inventory.add(map.returnInventory().get(commands[1]));
 						turn++;
 					}else {
 						System.out.println("You can't grab " + commands[1]+ " out of thin air.");
@@ -84,13 +84,11 @@ public class player {
 				case "use":
 					// Check if the item exists in the player inventory
 					// Fix if player has nothing error
-					if (inventory.length > 0) {
-						if (Arrays.stream(inventory).anyMatch(commands[1]::equals)) {
-							System.out.println("You used " + commands[1]);
-							turn++;
-						}else {
-							System.out.println("You can't use " + commands[1]+ ". You don't have it.");
-						}
+					if (inventory.in(commands[1])) {
+						System.out.println("You use " + commands[1]);
+						//Call and command or something
+					}else {
+						System.out.println("You search through your laptop bag but " + commands[1] + " isn't there.");
 					}
 					
 					break;
@@ -110,6 +108,8 @@ public class player {
 						+ "\n\nUse"
 						+ "\n\nInventory"
 						);
+			}else if (commands[0].equalsIgnoreCase("look")) {
+				System.out.println("TODO");
 			}
 			else {
 				System.out.println("I don't know what " + commands[0]+ " means.");
@@ -121,11 +121,11 @@ public class player {
 	// Moving the location of the player
 	private void movement(int x, int y) {
 		// Check if the new location y is valid
-		if (playerLocation[1] + y < map.length && playerLocation[1] + y > -1 && playerLocation[0] + x < map[0].length && playerLocation[0] + x > -1) {
+		if (playerLocation[1] + y < map.returnLevel().length && playerLocation[1] + y > -1 && playerLocation[0] + x <  map.returnLevel()[0].length && playerLocation[0] + x > -1) {
 			// Check if new location is and empty space (literally) :)
-			if (map[playerLocation[1] + y][playerLocation[0] + x] == ' ') {
+			if (map.returnLevel()[playerLocation[1] + y][playerLocation[0] + x] == ' ') {
 				// Only move if new location is empty and on map
-				if (x != 0 && playerLocation[0] + x < map[0].length && playerLocation[0] + x > -1) {
+				if (x != 0 && playerLocation[0] + x <  map.returnLevel()[0].length && playerLocation[0] + x > -1) {
 					playerLocation[0] += x;
 					turn++;
 				}else {
@@ -135,7 +135,7 @@ public class player {
 						System.out.println("You can't walk off the out of the school you have a assignment to hand in. x");
 					}
 				}
-				if (y != 0 && playerLocation[1] + y < map.length && playerLocation[1] + y > -1) {
+				if (y != 0 && playerLocation[1] + y < map.returnLevel().length && playerLocation[1] + y > -1) {
 					playerLocation[1] += y;
 					turn++;
 				}else {
@@ -146,12 +146,12 @@ public class player {
 					}
 				}
 			}else {
-				System.out.println("There something there");
+				System.out.println("Walking into walls won't help with your english.");
 			}
 			
 		}
 		else {
-			System.out.println("You cannot leave this dammed place until you graduate the DP.");
+			System.out.println("You cannot leave this place, the your english marks depends on it.");
 		}
 		
 		
@@ -159,15 +159,16 @@ public class player {
 	} 
 	
 	public String returnInventory() {
-		String temp = "";
-		for (int i = 0; i < inventory.length; i++) {
-			if (inventory[i] != null) {
-				temp = temp.concat(inventory[i]);
+		// A little intro string
+		String temp = "You rumage through your laptop bag and you find a ";
+		for (int i = 0; i < inventory.length(); i++) {
+			if (inventory.get(i).name() != null) {
+				temp = temp.concat(inventory.get(i).name() + ", ");
 			}
 			
 		}
 		if (temp.equals("")) {
-			temp = "Seems like you are traveling light.";
+			temp = "Seems like you are traveling light. Your laptop bag is very empty.";
 		}
 		return temp;
 		
