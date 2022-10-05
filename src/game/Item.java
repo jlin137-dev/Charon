@@ -28,4 +28,11 @@ public class Item {
 		}
 		return false;
 	}
+	
+	
+	//TODO make a nicer way to do this
+	public void delete() {
+		name = "___DELETED___";
+	}
 }
+// Eason was here

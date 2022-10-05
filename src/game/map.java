@@ -146,5 +146,57 @@ public class map {
 			return null;
 		}
 	}
+	
+	public void addToRoom(Item item) {
+		switch(currentLevel) {
+		case 0:
+			level0Inventory.add(item);
+		case 1:
+			level1Inventory.add(item);
+		case 2:
+			level2Inventory.add(item);
+		case 3:
+			level3Inventory.add(item);
+		case 4:
+			level4Inventory.add(item);
+		default:
+			break;
+		}
+	}
+	
+	public void remove(String itemName) {
+		switch(currentLevel) {
+		case 0:
+			level0Inventory.remove(itemName);
+		case 1:
+			level1Inventory.remove(itemName);
+		case 2:
+			level2Inventory.remove(itemName);
+		case 3:
+			level3Inventory.remove(itemName);
+		case 4:
+			level4Inventory.remove(itemName);
+		default:
+			break;
+		}
+	
+	}
+	
+	public String[] returnContents() {
+		switch(currentLevel) {
+		case 0:
+			return level0Inventory.returnContents();
+		case 1:
+			return level1Inventory.returnContents();
+		case 2:
+			return level2Inventory.returnContents();
+		case 3:
+			return level3Inventory.returnContents();
+		case 4:
+			return level4Inventory.returnContents();
+		default:
+			return null;
+		}
+	}
 
 }

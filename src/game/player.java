@@ -46,6 +46,7 @@ public class player {
 			if (commands[1] != null) {
 				switch(commands[0].toLowerCase()) {
 				// Movement
+				// TODO add they can press wasd and it moves
 				case "go":
 				case "run":
 				case "walk":
@@ -70,14 +71,26 @@ public class player {
 					break;
 				// Interaction
 				case "grab":
-					System.out.println(map.returnInventory().length());
 					if (map.returnInventory().in(commands[1])) {
 						System.out.println("You grab " + commands[1] + " from the ground and put it in your inventory.");
 						inventory.add(map.returnInventory().get(commands[1]));
+						// TODO remove from ground
+						map.remove(commands[1]);
 						turn++;
 					}else {
-						System.out.println("You can't grab " + commands[1]+ " out of thin air.");
+						System.out.println("You can't grab " + commands[1] + " out of thin air.");
 					}
+					break;
+				case "drop":
+					// TODO drop command into rooms
+					if (inventory.in(commands[1])) {
+						System.out.println("You drop " + commands[1] + " on to the ground.");
+						map.addToRoom(inventory.get(commands[1]));
+						inventory.remove(commands[1]);
+					}else {
+						System.out.println("You can't drop " + commands[1]+ ", you don't have it.");
+					}
+					
 					break;
 				case "use":
 					// Check if the item exists in the player inventory
@@ -108,16 +121,14 @@ public class player {
 						+ "\n\tUse"
 						+ "\n\tInventory"
 						+"\n\tLook"
+						+"\n\tDrop"
 						);
 			}else if (commands[0].equalsIgnoreCase("look")) {
-				System.out.println();
-				for (int i = 0; i < map.returnInventory().length(); i++) {
-					System.out.print(map.returnInventory().get(i).name());
-				}
 				if (map.returnInventory().length() == 0) {
 					System.out.println("The room you are in is very empty, there it no point looking for more stuff.");
+				}else {
+					System.out.println(Arrays.toString(map.returnContents()));
 				}
-				System.out.println();
 			}else if (commands[0].equals("up")) {
 				// Limit up properly
 				playerLocation[0] = 0;
@@ -133,6 +144,9 @@ public class player {
 				}else {
 					System.out.println("You can't go down your not a miner.");
 				}
+				//TODO Remove this later this is for testing
+			}else if (commands[0].equals("test")) {
+				System.out.println(Arrays.toString(inventory.returnContents()));
 			}
 			else {
 				System.out.println("I don't know what " + commands[0]+ " means.");

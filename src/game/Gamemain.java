@@ -21,7 +21,7 @@ public class Gamemain {
 		// Game loop
 		while (player.alive || !(player.gameFinished)) {
 			player.action();
-			System.out.println("Player at " + String.valueOf(player.playerLocation[0]) + " " + String.valueOf(player.playerLocation[1]) + " this is for debugging if you see this Mr Venz it mean that someone forgot to remove it :)");
+			//System.out.println("Player at " + String.valueOf(player.playerLocation[0]) + " " + String.valueOf(player.playerLocation[1]) + " this is for debugging if you see this Mr Venz it mean that someone forgot to remove it :)");
 			
 		}
 		scanner.close();

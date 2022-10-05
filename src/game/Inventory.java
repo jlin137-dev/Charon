@@ -21,6 +21,15 @@ public class Inventory {
 		}
 	}
 	
+	public void remove(String itemName) {
+		for(int i = 0; i < inventory.size(); i++) {
+			if (inventory.get(i).name().equals(itemName)) {
+				inventory.remove(i);
+			}
+		}
+		
+	}
+	
 	public boolean in(Item item) {
 		if (inventory.contains(item)) {
 			return true;
@@ -30,9 +39,14 @@ public class Inventory {
 	
 	public boolean in(String itemName) {
 		for (int i = 0; i < inventory.size(); i++) {
-			if (inventory.get(i).name().equals(itemName)) {
-				return true;
+			try {
+				if (inventory.get(i).name().equals(itemName)) {
+					return true;
+				}
+			}catch(Exception e){
+				return false;
 			}
+			
 		}
 		return false;
 	}
@@ -56,5 +70,20 @@ public class Inventory {
 	
 	public void lock() {
 		locked = !locked;
+	}
+	
+	public String[] returnContents() {
+		String[] temp = new String[inventory.size()];
+		int counter = 0;
+		for (Item item: inventory) {
+			try {
+				temp[counter] = item.name();
+			}catch(Exception e) {
+				temp[counter] = "";
+			}
+			counter++;
+			
+		}
+		return temp;
 	}
 }
