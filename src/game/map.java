@@ -79,7 +79,7 @@ public class map {
 	public Inventory level4Inventory = new Inventory(false);
 
 	public void init() {
-		// Add all the items and stuff
+		// Add all the items and stuff here
 		level0Inventory.add(new Item("Laptop".toLowerCase(), true, 99));
 		level1Inventory.add(new Item("Paper".toLowerCase(), true, 1));
 	}
@@ -153,18 +153,23 @@ public class map {
 	
 	public void addToRoom(Item item) {
 		switch(currentLevel) {
-		case 0:
-			level0Inventory.add(item);
-		case 1:
-			level1Inventory.add(item);
-		case 2:
-			level2Inventory.add(item);
-		case 3:
-			level3Inventory.add(item);
-		case 4:
-			level4Inventory.add(item);
-		default:
-			break;
+			case 0:
+				level0Inventory.add(item);
+				break;
+			case 1:
+				level1Inventory.add(item);
+				break;
+			case 2:
+				level2Inventory.add(item);
+				break;
+			case 3:
+				level3Inventory.add(item);
+				break;
+			case 4:
+				level4Inventory.add(item);
+				break;
+			default:
+				break;
 		}
 	}
 	

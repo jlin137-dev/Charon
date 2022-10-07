@@ -46,7 +46,7 @@ public class player {
 			if (commands[1] != null) {
 				switch(commands[0].toLowerCase()) {
 				// Movement
-				// TODO add they can press wasd and it moves
+				// TODO add they can enter wasd and it moves
 				case "go":
 				case "run":
 				case "walk":
@@ -128,6 +128,7 @@ public class player {
 				if (map.returnInventory().length() == 0) {
 					System.out.println("The room you are in is very empty, there it no point looking for more stuff.");
 				}else {
+					//TODO fix dupe glitch
 					System.out.println(Arrays.toString(map.returnContents()));
 				}
 			}else if (commands[0].equals("up")) {
@@ -147,7 +148,7 @@ public class player {
 				}
 				//TODO Remove this later this is for testing
 			}else if (commands[0].equals("test")) {
-				//System.out.println(Arrays.toString(inventory.returnContents()));
+				//li;jasdflkj
 			}
 			//TODO state of game
 			// inventory
@@ -158,8 +159,6 @@ public class player {
 				System.out.println("I don't know what " + commands[0]+ " means.");
 			}
 		}
-		
-		scanner.close();
 	}
 	// Moving the location of the player
 	private void movement(int x, int y) {
