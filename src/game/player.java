@@ -82,9 +82,9 @@ public class player {
 					}
 					break;
 				case "drop":
-					// TODO drop command into rooms
 					if (inventory.in(commands[1])) {
 						System.out.println("You drop " + commands[1] + " on to the ground.");
+						// TODO pass Item object in instead of by name
 						map.addToRoom(inventory.get(commands[1]));
 						inventory.remove(commands[1]);
 					}else {
@@ -111,19 +111,20 @@ public class player {
 		}else {
 			// This part needs to look better
 			if (commands[0].equalsIgnoreCase("inventory")) {
-				System.out.println(returnInventory());
+				System.out.println("Inventory: " + Arrays.toString(inventory.returnContents()));
 			}else if (commands[0].equalsIgnoreCase("help")) {
 				// Finish of this area with all the commands
 				System.out.println("Avalible commands:"
 						+ "\n\tGo + [NESW]"
 						+"\n\tUp/ Down"
-						+ "\n\tGrab"
-						+ "\n\tUse"
+						+ "\n\tGrab + [ITEM]"
+						+ "\n\tUse + [ITEM]"
 						+ "\n\tInventory"
 						+"\n\tLook"
-						+"\n\tDrop"
+						+"\n\tDrop + [ITEM]"
 						);
 			}else if (commands[0].equalsIgnoreCase("look")) {
+				// Looks and gets the objects around in the same room
 				if (map.returnInventory().length() == 0) {
 					System.out.println("The room you are in is very empty, there it no point looking for more stuff.");
 				}else {
@@ -146,14 +147,19 @@ public class player {
 				}
 				//TODO Remove this later this is for testing
 			}else if (commands[0].equals("test")) {
-				System.out.println(Arrays.toString(inventory.returnContents()));
+				//System.out.println(Arrays.toString(inventory.returnContents()));
 			}
+			//TODO state of game
+			// inventory
+			// what rooms are unlocked
+			// what room you are in
+			// state of printers
 			else {
 				System.out.println("I don't know what " + commands[0]+ " means.");
 			}
 		}
 		
-		//scanner.close();
+		scanner.close();
 	}
 	// Moving the location of the player
 	private void movement(int x, int y) {
@@ -190,24 +196,5 @@ public class player {
 		else {
 			System.out.println("You cannot leave this place, the your english marks depends on it.");
 		}
-		
-		
-		
 	} 
-	
-	public String returnInventory() {
-		// A little intro string
-		String temp = "You rumage through your laptop bag and you find a ";
-		for (int i = 0; i < inventory.length(); i++) {
-			if (inventory.get(i).name() != null) {
-				temp = temp.concat(inventory.get(i).name() + ", ");
-			}
-			
-		}
-		if (temp.equals("")) {
-			temp = "Seems like you are traveling light. Your laptop bag is very empty.";
-		}
-		return temp;
-		
-	}
 }

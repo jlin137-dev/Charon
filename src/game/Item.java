@@ -12,10 +12,12 @@ public class Item {
 		maxUses = itemUses; 
 	}
 	
+	// Return name
 	public String name() {
 		return name;
 	}
 	
+	// Checks if its moveable
 	public boolean moveable() {
 		return moveable;
 	}
@@ -27,12 +29,6 @@ public class Item {
 			return true;
 		}
 		return false;
-	}
-	
-	
-	//TODO make a nicer way to do this
-	public void delete() {
-		name = "___DELETED___";
 	}
 }
 // Eason was here

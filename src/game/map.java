@@ -6,6 +6,9 @@ public class map {
 		this.init();
 	}
 	
+	boolean jblock = false;
+	boolean locker = false;
+	
 	public int currentLevel = 0;
 	// L block
 	public char[][] level0 = {
@@ -78,6 +81,7 @@ public class map {
 	public void init() {
 		// Add all the items and stuff
 		level0Inventory.add(new Item("Laptop".toLowerCase(), true, 99));
+		level1Inventory.add(new Item("Paper".toLowerCase(), true, 1));
 	}
 
 	// Don't need it
@@ -181,7 +185,7 @@ public class map {
 		}
 	
 	}
-	
+	// TODO fix so some stuff is locked
 	public String[] returnContents() {
 		switch(currentLevel) {
 		case 0:
