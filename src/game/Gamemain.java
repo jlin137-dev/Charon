@@ -18,6 +18,7 @@ public class Gamemain {
 		//System.out.println("Welcome " + player.name + " to the land of QASMT.");
 		// Init the locations and story
 		
+		System.out.println("\nIt's Mondays morning 7:00 am, no one is at school yet.\nYour english assignment is due and it makes up a solid 60% of your grade.\nYou have finished it but you don't have a printer at home.\nYou enter the research centre in hopes to print it but when you try to print, and error that makes your blood run cold appears.\nNO PAPER");
 		// Game loop
 		while (player.alive || !(player.gameFinished)) {
 			player.action();
