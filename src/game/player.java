@@ -32,6 +32,9 @@ public class player {
 
 	
 	public void action() {
+		
+		boolean movementUnlocked = false;
+		
 		// Read what is happening TODO finish off the story and if there are any special locations
 		story.readStory(map.currentLevel, playerLocation[0], playerLocation[1]);
 		//Getting user input
@@ -52,23 +55,27 @@ public class player {
 				case "walk":
 				case "travel":
 					// Need to fix so player can't go out of bounds (working on rn)
-					if(commands[1].toLowerCase().equals("east")) { 
-						movement(1, 0);
+					
+					if (movementUnlocked == true) {
+						if(commands[1].toLowerCase().equals("east")) { 
+							movement(1, 0);
+							}
+						else if (commands[1].toLowerCase().equals("west")) {
+							movement(-1, 0);
+							}
+						else if (commands[1].toLowerCase().equals("north")) {
+							movement(0, -1);
+							}
+						else if (commands[1].toLowerCase().equals("south")) {
+							movement(0, 1);
+							}
+						else {
+							System.out.println("You can't go " + commands[1]);
 						}
-					else if (commands[1].toLowerCase().equals("west")) {
-						movement(-1, 0);
-						}
-					else if (commands[1].toLowerCase().equals("north")) {
-						movement(0, -1);
-						}
-					else if (commands[1].toLowerCase().equals("south")) {
-						movement(0, 1);
-						}
-					else {
-						System.out.println("You can't go " + commands[1]);
+						
+						break;
 					}
 					
-					break;
 				// Interaction
 				case "grab":
 					if (map.returnInventory().in(commands[1])) {
@@ -131,30 +138,45 @@ public class player {
 					//TODO fix dupe glitch
 					System.out.println(Arrays.toString(map.returnContents()));
 				}
+				
+			// current level vs player level?
 			}else if (commands[0].equals("up")) {
 				// Limit up properly
 				playerLocation[0] = 0;
 				playerLocation[1] = 0;
 				
 				//TODO: fix up this
-				if (playerLevel+1 == 2 && map.jblock) {
+				if (map.currentLevel+1 == 1 && map.jblockUnlocked == false) {
 					System.out.println("You arrive outside J block. You look around, but the door is locked");
 					System.out.println("Student service at A block won't be open this early, right?");
 				}
-				
-				
+				else if (map.currentLevel+1 == 3 && map.lockerUnlocked == false) {
+					System.out.println("You run back to your locker on the other side of the school");
+					System.out.println("Then, you realize you forgot your locker password \n But you remember you stored it on your phone at least…");
+				}
 				map.currentLevel++;
+				System.out.println("You moved up a level to " + map.currentLevel);
+				
+				
+				
 			}else if (commands[0].equals("down")) {
 				if (map.currentLevel > 0) {
 					playerLocation[0] = 0;
 					playerLocation[1] = 0;
 					
-					if (playerLevel-1 == 2 && map.jblock) {
+					if (map.currentLevel-1 == 1 && map.jblockUnlocked == false) {
 						System.out.println("You arrive outside J block. You look around, but the door is locked");
 						System.out.println("Student service at A block won't be open this early, right?");
 					}
-					
+					else if (map.currentLevel-1 == 3 && map.lockerUnlocked == false) {
+						System.out.println("You run back to your locker on the other side of the school");
+						System.out.println("Then, you realize you forgot your locker password \n But you remember you stored it on your phone at least…");
+					}
 					map.currentLevel--;
+					System.out.println("You moved up a level to " + map.currentLevel);
+					
+					
+					
 				}else {
 					System.out.println("You can't go down your not a miner.");
 				}

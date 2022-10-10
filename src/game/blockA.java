@@ -19,9 +19,9 @@ public class blockA {
 		boolean B_Unlocked = false;
 		boolean C_Unlocked = false;
 		
-		System.out.println("You enter A block, the reception block");
-		System.out.println("In front of you, the reception desk is empty. There's a drawer behind the reception desk");
-		System.out.println("The reception desk blocks your way");
+		//System.out.println("You enter A block, the reception block");
+		//System.out.println("In front of you, the reception desk is empty. There's a drawer behind the reception desk");
+		//System.out.println("The reception desk blocks your way");
 		
 		
 		if (userInput.equals( "Jump over desk")) {

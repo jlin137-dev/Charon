@@ -6,8 +6,8 @@ public class map {
 		this.init();
 	}
 	
-	boolean jblock = false;
-	boolean locker = false;
+	boolean jblockUnlocked = false;
+	boolean lockerUnlocked = false;
 	
 	public int currentLevel = 0;
 	// L block
