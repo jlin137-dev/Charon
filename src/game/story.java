@@ -11,6 +11,14 @@ public class story {
 				// Format: [Level#] [x] [y]
 				//storyLocations.put("0 0 0", "\nIt's Mondays morning 7:00 am, no one is at school yet.\nYour english assignment is due and it makes up a solid 60% of your grade.\nYou have finished it but you don't have a printer at home.\nYou enter the research centre in hopes to print it but when you try to print, and error that makes your blood run cold appears.\nNO PAPER");
 				// Leave empty if there is nothing storyLocations.put("0 1 0", "");
+		
+		// J block
+		storyLocations.put("1, 0, 0", null);
+		storyLocations.put("2, 0, 0", null);
+		storyLocations.put("3, 0, 0", null);
+		storyLocations.put("4, 0, 0", null);
+		storyLocations.put("5, 0, 0", null);
+		
 	}
 	public void readStory(int level, int x, int y){
 		if (storyLocations.get(level +" " + x + " " + y) != null) {

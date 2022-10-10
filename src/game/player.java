@@ -136,11 +136,23 @@ public class player {
 				playerLocation[0] = 0;
 				playerLocation[1] = 0;
 				
+				//TODO: fix up this
+				if (playerLevel+1 == 2 && map.jblock) {
+					System.out.println("You arrive outside J block. You look around, but the door is locked");
+					System.out.println("Student service at A block won't be open this early, right?");
+				}
+				
+				
 				map.currentLevel++;
 			}else if (commands[0].equals("down")) {
 				if (map.currentLevel > 0) {
 					playerLocation[0] = 0;
 					playerLocation[1] = 0;
+					
+					if (playerLevel-1 == 2 && map.jblock) {
+						System.out.println("You arrive outside J block. You look around, but the door is locked");
+						System.out.println("Student service at A block won't be open this early, right?");
+					}
 					
 					map.currentLevel--;
 				}else {
