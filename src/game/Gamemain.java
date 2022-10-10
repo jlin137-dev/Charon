@@ -26,6 +26,12 @@ public class Gamemain {
 			
 		}
 		scanner.close();
+		
+		System.out.println("You finally submit your english assignment...");
+		System.out.println("You look at your timetable:");
+		System.out.println("English");
+		System.out.println("...");
+		System.out.println("\n\n\n You win.");
 	}
 
 }
