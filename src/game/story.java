@@ -13,10 +13,19 @@ public class story {
 				// Leave empty if there is nothing storyLocations.put("0 1 0", "");
 		
 		// J block
-		storyLocations.put("1, 0, 0", null);
-		storyLocations.put("2, 0, 0", null);
-		storyLocations.put("3, 0, 0", null);
-		storyLocations.put("4, 0, 0", null);
+		storyLocations.put("1, 0, 0", "You arrive outside J block, and use your key to open the door. \n the door unlocks \n you see papers on a desk");
+		// A block
+		storyLocations.put("2, 0, 0", "You enter A block, the reception block \n In front of you, the reception desk is empty. There's a drawer behind the reception desk \n The reception desk blocks your way");
+		// Lockers
+		storyLocations.put("3, 0, 0", "You open your locker. You see the stapler inside");
+		//Oval
+		storyLocations.put("4, 0, 0", "You arrive at the courtyard to search for a charger \n "
+				+ "Just then, someone from soccer training across the road kicks a soccer ball past your head \n"
+				+ "It lands on the oval \n"
+				+ "Bang!\n"
+				+ "A mine explodes, and sends you flying backwards\n"
+				+ "It seems like the school mined the oval… You're going to have to un-mine the oval to find the charger...");
+		//
 		storyLocations.put("5, 0, 0", null);
 		
 	}
