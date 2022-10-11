@@ -1,19 +1,17 @@
 package minigames;
 import java.util.*;
-//System.out.println(mineChar.codePointCount(0, mineChar.length()));
 
 public class MineSweeperMain {
 	public static void main(String[] args) {
 		//variables
 		int width = 10;
 		int height = 8;
-		boolean inGame = true;
 		int minesLeft = ((width  * height)/6);
 		//activate
 		System.out.println(mineSweeper(width, height, minesLeft));
 	}
 	
-	//create map
+	//create variables
 	public static ArrayList<String> map = new ArrayList<String>();
 	public static ArrayList<String> mapShow = new ArrayList<String>();
 	public static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
