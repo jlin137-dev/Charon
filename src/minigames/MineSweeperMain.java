@@ -1,6 +1,12 @@
 package minigames;
 import java.util.*;
 
+/*	Minesweeper file
+ * 	Run with `mineSweeper(width, height, total mines);`
+ * 	Temporary main class should be deleted
+ * 	Method will return `true` when the game is finished, and keep autorestarting itself if you die
+ */
+
 public class MineSweeperMain {
 	public static void main(String[] args) {
 		//variables
@@ -15,17 +21,19 @@ public class MineSweeperMain {
 	public static ArrayList<String> map = new ArrayList<String>();
 	public static ArrayList<String> mapShow = new ArrayList<String>();
 	public static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	public static int attemptCount = 0;
 	
 	public static boolean mineSweeper(int x, int y, int mines) {
+		attemptCount++;
 		int movesCount = 0;
 		char tile = '*';						//no mine tile
 		String mineChar = "Ф";					//mine tile
-		boolean inGame = true;
 		map.clear();
 		mapShow.clear();
 		
 		//initial print
 		System.out.println("\nBeginning minigame Minesweeper...");
+		System.out.println("Attempt " + attemptCount);
 		//generate covered map
 		for(int i = 0; i < y; i++) {
 			String row = new String();
@@ -95,12 +103,13 @@ public class MineSweeperMain {
 			map.set(i, String.join("", row));
 		}
 		//begin game
-		while(inGame = true) {
+		while(true) {
 			System.out.println(
 					"Moves: " + movesCount + "     Mines:" + mines + //"❤️❤️❤️" +
 					"\n|===================|"
 					);
 			printMap(x, y);
+			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(System.in);
 			String input = scanner.nextLine().trim().toLowerCase();
 			//command handler
@@ -141,8 +150,9 @@ public class MineSweeperMain {
 //							System.out.println(String.join("", map));
 //							System.out.println("number: " + number);
 							movesCount++;
-							if(number == String.valueOf(mineChar)) {
-								System.out.println("boom");
+							if(number.equals("Ф")) {
+								System.out.println("You exploded on a mine! Wait a minute, why am I still alive...");
+								return mineSweeper(x, y, mines);
 							}
 						} else {
 							System.out.println("Looks like I didn't recognise the command... (use help)");
@@ -154,10 +164,11 @@ public class MineSweeperMain {
 				}
 			}
 		}
-		return false;
+		//return false;
 	}
 	//map printing
 	public static void printMap(int x, int y) {
+		@SuppressWarnings("unchecked")
 		ArrayList<String> mapShowCoords = (ArrayList<String>) mapShow.clone();
 		//vertical coordinates
 		for(int i = 0; i < y; i++) {
