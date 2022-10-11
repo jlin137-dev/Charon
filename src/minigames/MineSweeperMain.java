@@ -14,7 +14,10 @@ public class MineSweeperMain {
 		int height = 8;
 		int minesLeft = ((width  * height)/6);
 		//activate
-		System.out.println(mineSweeper(width, height, minesLeft));
+		boolean ms = mineSweeper(width, height, minesLeft);
+		if(ms = true) {
+			System.out.println("You beat the game!");
+		}
 	}
 	
 	//create variables
