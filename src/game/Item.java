@@ -5,16 +5,29 @@ public class Item {
 	private static boolean moveable;
 	//goes down and if its zero it magically disappears
 	private int maxUses;
+	private String id;
+	private String state;
 	
-	public Item(String itemName, boolean itemMoveable, int itemUses){
+	public Item(String itemName, String itemId, String itemState, boolean itemMoveable, int itemUses){
 		name = itemName;
 		moveable = itemMoveable;
 		maxUses = itemUses; 
+		id = itemId;
+		state = itemState;
+		
 	}
 	
 	// Return name
 	public String name() {
 		return name;
+	}
+	public String state(String setState) {
+		if(setState == null) {
+			return state;
+		} else {
+			state = setState;
+			return null;
+		}
 	}
 	
 	// Checks if its moveable
@@ -23,7 +36,6 @@ public class Item {
 	}
 	
 	public boolean use() {
-		
 		if (maxUses > 0) {
 			maxUses--;
 			return true;

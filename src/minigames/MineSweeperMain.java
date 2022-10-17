@@ -6,18 +6,9 @@ import java.util.*;
  * 	Temporary main class should be deleted
  * 	Method will return `true` when the game is finished, and keep autorestarting itself if you die
  */
-
 public class MineSweeperMain {
 	public static void main(String[] args) {
-		//variables
-		int width = 10;
-		int height = 8;
-		int minesLeft = ((width  * height)/6);
-		//activate
-		boolean ms = mineSweeper(width, height, minesLeft);
-		if(ms = true) {
-			System.out.println("You beat the game!");
-		}
+		boolean ms = mineSweeper(10, 8, 4);
 	}
 	
 	//create variables
@@ -29,8 +20,10 @@ public class MineSweeperMain {
 	public static boolean mineSweeper(int x, int y, int mines) {
 		attemptCount++;
 		int movesCount = 0;
-		char tile = '*';						//no mine tile
-		String mineChar = "Ф";					//mine tile
+		String tile = "*";						//no mine tile
+		String mineChar = "▣";					//mine tile
+		int minesFound = 0;
+		int minesTotal = mines;
 		map.clear();
 		mapShow.clear();
 		
@@ -114,29 +107,36 @@ public class MineSweeperMain {
 			printMap(x, y);
 			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(System.in);
-			String input = scanner.nextLine().trim().toLowerCase();
+			String[] input = scanner.nextLine().trim().toLowerCase().split(" ");
 			//command handler
-			if (input.length() > 1) {
-				switch(input) {
+			if (input[0].length() > 1) {
+				String number = "";
+				String[] coords = {};
+				switch(input[0]) {
 				case "help":
-					System.out.println("Google therules for minesweeeper, too lazy to write them again" + "\r\n"
+					System.out.println("Google therules for minesweeeper, too lazy to write here" + "\r\n"
 							+ "Coordinates are done in the format LETTER_NUMBER, e.g 'a1'" + "\r\n"
 							+ "Available commands:" + "\r\n"
-							+ "help		show this message" + "\r\n"
-							+ "restart		restart Minesweeper" + "\r\n"
-							+ "flag *coords*	place a flag at the spot" + "\r\n"
-							+ "*coords*	reveal a tile" + "\r\n");
+							+ "	help		show this message" + "\r\n"
+							+ "	restart		restart Minesweeper" + "\r\n"
+							+ "	flag xy		place a flag at the spot" + "\r\n"
+							+ "	unflag xy	remove a flag at the spot" + "\r\n"
+							+ "	xy		reveal a tile" + "\r\n");
 					break;
 				case "restart":
 					return mineSweeper(x, y, mines);
-				case "use jimmy":
-					System.out.println("You used Jimmy to help you beat the game!");
-					System.out.println("You beat Minesweeper within " + movesCount + " moves.");
-					return true;
-				default:
-					//place mine where user states\
+				case "use":
+					if(input[1].equals("jimmy")) {
+						System.out.println("You used Jimmy to help you beat the game!");
+						System.out.println("You beat Minesweeper within " + movesCount + " moves.");
+						return true;
+					}
+					break;
+				case "flag":
+					number = "⚑";
+					mines--;
 					try {
-						String[] coords = input.split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");		//Split into letters and numbers
+						coords = input[1].split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");		//Split into letters and numbers
 						if((coords.length == 2)) {												//filter out any junk command
 							int InputX = alphabet.indexOf(coords[0].toUpperCase()) + 1;
 							if(InputX <= 0 || InputX > x) throw new Exception("X coordinate not within range!");
@@ -144,7 +144,59 @@ public class MineSweeperMain {
 							if(InputY <= 0 || InputY > y) throw new Exception("Y coordinate not within range!");
 							
 							System.out.println("X: "  + InputX + "; Y: " + InputY);
-							String number = map.get(y - InputY).split("")[InputX * 2 - 1];
+							String[] yRow = mapShow.get(y - InputY).split("");
+							yRow[(InputX - 1) * 2 + 1] = number;
+							mapShow.set(y - InputY, String.join("", yRow));
+							movesCount++;
+							
+							if(map.get(y - InputY).split("")[InputX * 2 - 1].equals(mineChar)) {
+								minesFound ++;
+							}
+						}
+					} catch(Exception e) {
+						System.out.println("Oops, seems like there was an error: \n" + e);
+					}
+					break;//⚑
+				case "unflag":
+					number = tile;
+					mines++;
+					try {
+						coords = input[1].split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");		//Split into letters and numbers
+						if((coords.length == 2)) {												//filter out any junk command
+							int InputX = alphabet.indexOf(coords[0].toUpperCase()) + 1;
+							if(InputX <= 0 || InputX > x) throw new Exception("X coordinate not within range!");
+							int InputY = Integer.parseInt(coords[1]);
+							if(InputY <= 0 || InputY > y) throw new Exception("Y coordinate not within range!");
+							
+							System.out.println("X: "  + InputX + "; Y: " + InputY);
+							String[] yRow = mapShow.get(y - InputY).split("");
+							yRow[(InputX - 1) * 2 + 1] = number;
+							mapShow.set(y - InputY, String.join("", yRow));
+							movesCount++;
+							
+							if(map.get(y - InputY).split("")[InputX * 2 - 1].equals(mineChar)) {
+								minesFound --;
+							}
+						}
+					} catch(Exception e) {
+						System.out.println("Oops, seems like there was an error: \n" + e);
+					}
+					break;
+				case "debug":
+					System.out.print(String.join("", map));
+					break;
+				default:
+					//place mine where user states\
+					try {
+						coords = input[0].split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");		//Split into letters and numbers
+						if((coords.length == 2)) {												//filter out any junk command
+							int InputX = alphabet.indexOf(coords[0].toUpperCase()) + 1;
+							if(InputX <= 0 || InputX > x) throw new Exception("X coordinate not within range!");
+							int InputY = Integer.parseInt(coords[1]);
+							if(InputY <= 0 || InputY > y) throw new Exception("Y coordinate not within range!");
+							
+							System.out.println("X: "  + InputX + "; Y: " + InputY);
+							number = map.get(y - InputY).split("")[InputX * 2 - 1];
 							String[] yRow = mapShow.get(y - InputY).split("");
 							yRow[(InputX - 1) * 2 + 1] = number;
 							mapShow.set(y - InputY, String.join("", yRow));
@@ -153,8 +205,10 @@ public class MineSweeperMain {
 //							System.out.println(String.join("", map));
 //							System.out.println("number: " + number);
 							movesCount++;
-							if(number.equals("Ф")) {
-								System.out.println("You exploded on a mine! Wait a minute, why am I still alive...");
+							if(number.equals(mineChar)) {
+								System.out.println("You exploded on a mine! Wait a minute, why am I \nstill alive... And why did everything reset?\nPress ENTER to restart.");
+								Scanner scanner2 = new Scanner(System.in);
+								String input2 = scanner.nextLine().trim().toLowerCase();
 								return mineSweeper(x, y, mines);
 							}
 						} else {
@@ -165,6 +219,12 @@ public class MineSweeperMain {
 					}
 					break;
 				}
+			}
+			if(minesFound == minesTotal && mines == 0) {
+				scanner.close();
+				printMap(x, y);
+				System.out.println("You finally flag out the last mine, and you see your charger.");
+				return true;
 			}
 		}
 		//return false;

@@ -2,6 +2,8 @@ package game;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import minigames.MineSweeperMain;
+
 public class player {
 	// Variables
 	
@@ -56,7 +58,7 @@ public class player {
 				case "travel":
 					// Need to fix so player can't go out of bounds (working on rn)
 					
-					if (movementUnlocked == true) {
+					if (!movementUnlocked == true) {
 						if(commands[1].toLowerCase().equals("east")) { 
 							movement(1, 0);
 							}
@@ -77,6 +79,7 @@ public class player {
 					}
 					
 				// Interaction
+					break;
 				case "grab":
 					if (map.returnInventory().in(commands[1])) {
 						System.out.println("You grab " + commands[1] + " from the ground and put it in your inventory.");
@@ -103,12 +106,50 @@ public class player {
 					// Check if the item exists in the player inventory
 					// Fix if player has nothing error
 					if (inventory.in(commands[1])) {
-						System.out.println("You use " + commands[1]);
+						switch(commands[1].toLowerCase()) {
+						case "laptop":
+							Item laptop = inventory.get("laptop");
+							switch(laptop.state(null)) {
+							case "off":
+								System.out.println("You turn on your laptop. You see the word document with your English\nessay. You stare at it.");
+								laptop.state("on");
+								break;
+							case "on":
+								if(laptop.state(null) == "") {
+									
+								} else {
+									System.out.println("You keep staring at your English assignment. It isn't really effective... \nIf only there was a printer somewhere so I could actually hand it in...");
+								}
+								break;
+							case "broken":
+								System.out.println("How the h");
+								break;
+							default:
+								System.out.println("If you see this message someone messed up the spelling and now the game is broken.\nHopefully you're not Mr Venz");
+							}
+							break;
+						}
 						//Call and command or something
 					}else {
-						System.out.println("You search through your laptop bag but " + commands[1] + " isn't there.");
+						switch(commands[1]) {
+						case "":
+							break;
+						default:
+							System.out.println("You search through your laptop bag but " + commands[1] + " isn't there.");
+							break;
+						}
 					}
 					
+					break;
+				case "start":
+					if(commands[1].equals("minesweeper")) {
+						System.out.println("This is a debug command");
+						try {
+							new MineSweeperMain().mineSweeper(Integer.parseInt(commands[2]), Integer.parseInt(commands[3]), Integer.parseInt(commands[4]));
+						} catch (Exception e) {
+							System.out.println("L wrong format.\nstart minesweeper WIDTH HEIGHT MINES_COUNT");
+						}
+					}
 					break;
 				default:
 					System.out.println("You can't do " + commands[0]);
@@ -122,13 +163,14 @@ public class player {
 			}else if (commands[0].equalsIgnoreCase("help")) {
 				// Finish of this area with all the commands
 				System.out.println("Avalible commands:"
-						+ "\n\tGo + [NESW]: Allows you to move within the level, up being north"
-						+"\n\tUp/ Down: Allows you to move across levels, like in a skyscraper"
-						+ "\n\tGrab + [ITEM]: Picks up the item and put it in your inventory"
-						+ "\n\tUse + [ITEM]: Use an item in your inventory. This may get rid of another item in your inventory"
-						+ "\n\tInventory: Check your inventory"
-						+"\n\tLook: Look around the room"
-						+"\n\tDrop + [ITEM]: Remove an item from your inventory"
+						+ "\n\t* Go + [NESW]: Allows you to move within the level, up being north"
+						+"\n\t* Up/ Down: Allows you to move across levels, like in a skyscraper"
+						+ "\n\t* Grab + [ITEM]: Picks up the item and put it in your inventory"
+						+ "\n\t* Use + [ITEM]: Use an item in your inventory. This may get rid of"
+						+ "\n\tanother item in your inventory"
+						+ "\n\t* Inventory: Check your inventory"
+						+"\n\t* Look: Look around the room"
+						+"\n\t* Drop + [ITEM]: Remove an item from your inventory"
 						);
 			}else if (commands[0].equalsIgnoreCase("look")) {
 				// Looks and gets the objects around in the same room
@@ -149,6 +191,7 @@ public class player {
 				if (map.currentLevel+1 == 1 && map.jblockUnlocked == false) {
 					System.out.println("You arrive outside J block. You look around, but the door is locked");
 					System.out.println("Student service at A block won't be open this early, right?");
+					//TODO: movement locked
 				}
 				else if (map.currentLevel+1 == 3 && map.lockerUnlocked == false) {
 					System.out.println("You run back to your locker on the other side of the school");
@@ -178,11 +221,12 @@ public class player {
 					
 					
 				}else {
-					System.out.println("You can't go down your not a miner.");
+					System.out.println("You can't go down you're not a miner.");
 				}
 				//TODO Remove this later this is for testing
-			}else if (commands[0].equals("test")) {
-				//li;jasdflkj
+			}else if (commands[0].equals("debug")) {
+				Gamemain.debug = !Gamemain.debug;
+				System.out.println(Gamemain.debug);
 			}
 			//TODO state of game
 			// inventory
@@ -199,7 +243,7 @@ public class player {
 		// Check if the new location y is valid
 		if (playerLocation[1] + y < map.returnLevel().length && playerLocation[1] + y > -1 && playerLocation[0] + x <  map.returnLevel()[0].length && playerLocation[0] + x > -1) {
 			// Check if new location is and empty space (literally) :)
-			if (map.returnLevel()[playerLocation[1] + y][playerLocation[0] + x] == ' ') {
+			if (map.returnLevel()[playerLocation[1] + y][playerLocation[0] + x] == " ") {
 				// Only move if new location is empty and on map
 				if (x != 0 && playerLocation[0] + x <  map.returnLevel()[0].length && playerLocation[0] + x > -1) {
 					playerLocation[0] += x;
@@ -218,7 +262,7 @@ public class player {
 					//ngl idk why this is here
 					if (y != 0) {
 						// the y at the end is for debugging
-						System.out.println("You can't walk off the out of the school you have a assignment to hand in. y");
+						System.out.println("You can't walk off the out of the school you have a assignment to hand in.");
 					}
 				}
 			}else {
