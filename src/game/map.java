@@ -6,8 +6,8 @@ public class map {
 		this.init();
 	}
 	
-	boolean jblockUnlocked = false;
-	boolean lockerUnlocked = false;
+	public boolean jblockUnlocked = false;
+	public boolean lockerUnlocked = false;
 	
 	public int currentLevel = 0;
 	// L block
@@ -80,6 +80,8 @@ public class map {
 		level0Inventory.add(new Item("laptop", "lpt", "off", true, 99));
 		level0Inventory.add(new Item("printer", "1", "off", false, 99));
 		level1Inventory.add(new Item("paper", "ppr", "empty", true, 1));
+		level2Inventory.add(new Item ("J Block Key", "", "empty", true, 2));
+		level3Inventory.add(new Item ("Stapler", "", "usable", true, 2));
 	}
 
 	// Don't need it
