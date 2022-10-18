@@ -13,10 +13,11 @@ public class story {
 				// Leave empty if there is nothing storyLocations.put("0 1 0", "");
 		
 		// J block
+		storyLocations.put("1, 0, 0", "You arrive outside J block. You look around, but the door is locked. \n Student service at A block won't be open this early, right?");
 		storyLocations.put("1, 0, 1", "You arrive outside J block, and use your key to open the door. \n the door unlocks \n you see papers on a desk");
 		// A block
-		storyLocations.put("2, 0, 0", "You arrive at the reception gate. No one is inside. But the sliding door opens"
-				+ "You step inside A block. The reception desk stands in front of you, blocking your way"
+		storyLocations.put("2, 0, 0", "You arrive at the reception gate. No one is inside. But the sliding door opens \n"
+				+ "You step inside A block. The reception desk stands in front of you, blocking your way\n"
 				+"Behind, you can see 3 drawers. Maybe these have paper?");
 		storyLocations.put("2, 0, 1", "You enter A block, the reception block \n In front of you, the reception desk is empty. There's a drawer behind the reception desk \n The reception desk blocks your way");
 		// Lockers

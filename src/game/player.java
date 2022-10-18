@@ -35,7 +35,16 @@ public class player {
 	
 	public void action() {
 		
-		boolean movementUnlocked = false;
+		boolean movementUnlocked = true;
+		if (map.currentLevel == 1 && map.jblockUnlocked == false) {
+				movementUnlocked = false;
+			}
+		else if (map.currentLevel == 3 && map.lockerUnlocked == false) {
+				movementUnlocked = false;
+		}
+		else {
+			movementUnlocked = true;
+		}
 		
 		// Read what is happening TODO finish off the story and if there are any special locations
 		story.readStory(map.currentLevel, playerLocation[0], playerLocation[1]);
@@ -58,24 +67,31 @@ public class player {
 				case "travel":
 					// Need to fix so player can't go out of bounds (working on rn)
 					
-					if (!movementUnlocked == true) {
+					if (movementUnlocked == true) {
 						if(commands[1].toLowerCase().equals("east")) { 
 							movement(1, 0);
+							System.out.println("You try move east 1 square");
 							}
 						else if (commands[1].toLowerCase().equals("west")) {
 							movement(-1, 0);
+							System.out.println("You try move west 1 square");
 							}
 						else if (commands[1].toLowerCase().equals("north")) {
 							movement(0, -1);
+							System.out.println("You try move north 1 square");
 							}
 						else if (commands[1].toLowerCase().equals("south")) {
 							movement(0, 1);
+							System.out.println("You try move south 1 square");
 							}
 						else {
 							System.out.println("You can't go " + commands[1]);
 						}
 						
 						break;
+					}
+					else {
+						System.out.println("The room is locked...\n walking into walls wont help you with English?");
 					}
 					
 				// Interaction
@@ -186,17 +202,20 @@ public class player {
 				// Limit up properly
 				playerLocation[0] = 0;
 				playerLocation[1] = 0;
+				//movementUnlocked = true;
 				
 				//TODO: fix up this
-				if (map.currentLevel+1 == 1 && map.jblockUnlocked == false) {
-					System.out.println("You arrive outside J block. You look around, but the door is locked");
-					System.out.println("Student service at A block won't be open this early, right?");
+				//if (map.currentLevel+1 == 1 && map.jblockUnlocked == false) {
+					//System.out.println("You arrive outside J block. You look around, but the door is locked");
+					//System.out.println("Student service at A block won't be open this early, right?");
+					//movementUnlocked = false;
 					//TODO: movement locked
-				}
-				else if (map.currentLevel+1 == 3 && map.lockerUnlocked == false) {
-					System.out.println("You run back to your locker on the other side of the school");
-					System.out.println("Then, you realize you forgot your locker password \n But you remember you stored it on your phone at least…");
-				}
+				//}
+				//else if (map.currentLevel+1 == 3 && map.lockerUnlocked == false) {
+					//System.out.println("You run back to your locker on the other side of the school");
+					//System.out.println("Then, you realize you forgot your locker password \n But you remember you stored it on your phone at least…");
+					//movementUnlocked = false;
+				//}
 				map.currentLevel++;
 				System.out.println("You moved up a level to " + map.currentLevel);
 				
@@ -206,17 +225,20 @@ public class player {
 				if (map.currentLevel > 0) {
 					playerLocation[0] = 0;
 					playerLocation[1] = 0;
+					//movementUnlocked = true;
 					
-					if (map.currentLevel-1 == 1 && map.jblockUnlocked == false) {
-						System.out.println("You arrive outside J block. You look around, but the door is locked");
-						System.out.println("Student service at A block won't be open this early, right?");
-					}
-					else if (map.currentLevel-1 == 3 && map.lockerUnlocked == false) {
-						System.out.println("You run back to your locker on the other side of the school");
-						System.out.println("Then, you realize you forgot your locker password \n But you remember you stored it on your phone at least…");
-					}
+					//if (map.currentLevel-1 == 1 && map.jblockUnlocked == false) {
+						//System.out.println("You arrive outside J block. You look around, but the door is locked");
+						//System.out.println("Student service at A block won't be open this early, right?");
+						//movementUnlocked = false;
+					//}
+					//else if (map.currentLevel-1 == 3 && map.lockerUnlocked == false) {
+						//System.out.println("You run back to your locker on the other side of the school");
+						//System.out.println("Then, you realize you forgot your locker password \n But you remember you stored it on your phone at least…");
+						//movementUnlocked = false;
+					//}
 					map.currentLevel--;
-					System.out.println("You moved up a level to " + map.currentLevel);
+					System.out.println("You moved down a level to " + map.currentLevel);
 					
 					
 					
