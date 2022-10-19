@@ -68,19 +68,15 @@ public class player {
 					if (movementUnlocked == true) {
 						if(commands[1].toLowerCase().equals("east")) { 
 							movement(1, 0);
-							System.out.println("You try move east 1 square");
 							}
 						else if (commands[1].toLowerCase().equals("west")) {
 							movement(-1, 0);
-							System.out.println("You try move west 1 square");
 							}
 						else if (commands[1].toLowerCase().equals("north")) {
 							movement(0, -1);
-							System.out.println("You try move north 1 square");
 							}
 						else if (commands[1].toLowerCase().equals("south")) {
 							movement(0, 1);
-							System.out.println("You try move south 1 square");
 							}
 						else {
 							System.out.println("You can't go " + commands[1]);
