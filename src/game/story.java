@@ -13,11 +13,18 @@ public class story {
 				// Leave empty if there is nothing storyLocations.put("0 1 0", "");
 		
 		// J block
-		storyLocations.put("1, 0, 0", "You arrive outside J block, and use your key to open the door. \n the door unlocks \n you see papers on a desk");
+		storyLocations.put("1, 0, 0", "You arrive outside J block. You look around, but the door is locked. \n Student service at A block won't be open this early, right?");
+		storyLocations.put("1, 0, 1", "You arrive outside J block, and use your key to open the door. \n the door unlocks \n you see papers on a desk");
 		// A block
-		storyLocations.put("2, 0, 0", "You enter A block, the reception block \n In front of you, the reception desk is empty. There's a drawer behind the reception desk \n The reception desk blocks your way");
+		storyLocations.put("2, 0, 0", "You arrive at the reception gate. No one is inside. But the sliding door opens \n"
+				+ "You step inside A block. The reception desk stands in front of you, blocking your way\n"
+				+"Behind, you can see 3 drawers. Maybe these have paper?");
+		storyLocations.put("2, 0, 1", "You enter A block, the reception block \n In front of you, the reception desk is empty. There's a drawer behind the reception desk \n The reception desk blocks your way");
 		// Lockers
-		storyLocations.put("3, 0, 0", "You open your locker. You see the stapler inside");
+		storyLocations.put("3, 0, 0", "You run back to your locker on the other side of the school"
+				+ "\nYou find 3 identical lockers… which one is your locker?"
+				+ "\nThen, you realize you forgot your locker password"
+				+"\nBut you remember you stored it on your phone at least…");
 		//Oval
 		storyLocations.put("4, 0, 0", "You arrive at the courtyard to search for a charger \n "
 				+ "Just then, someone from soccer training across the road kicks a soccer ball past your head \n"
@@ -30,8 +37,9 @@ public class story {
 		
 	}
 	public void readStory(int level, int x, int y){
-		if (storyLocations.get(level +" " + x + " " + y) != null) {
-			System.out.println(storyLocations.get(level +" " + x + " " + y));
+		System.out.println(1);
+		if (storyLocations.get(level +", " + x + ", " + y) != null) {
+			System.out.println(storyLocations.get(level +", " + x + ", " + y));
 		}
 		// So that the text isn't too cramped together
 		System.out.println();

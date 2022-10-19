@@ -1,4 +1,4 @@
-package minigames;
+package game;
 import java.util.*;
 
 /*	Minesweeper file

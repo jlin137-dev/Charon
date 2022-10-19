@@ -2,8 +2,6 @@ package game;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import minigames.MineSweeperMain;
-
 public class player {
 	// Variables
 	
@@ -35,10 +33,19 @@ public class player {
 	
 	public void action() {
 		
-		boolean movementUnlocked = false;
+		boolean movementUnlocked = true;
+		if (game.map.currentLevel == 1 && map.jblockUnlocked == false) {
+				movementUnlocked = false;
+			}
+		else if (game.map.currentLevel == 3 && map.lockerUnlocked == false) {
+				movementUnlocked = false;
+		}
+		else {
+			movementUnlocked = true;
+		}
 		
 		// Read what is happening TODO finish off the story and if there are any special locations
-		story.readStory(map.currentLevel, playerLocation[0], playerLocation[1]);
+		story.readStory(game.map.currentLevel, playerLocation[0], playerLocation[1]);
 		//Getting user input
 		Scanner scanner = new Scanner(System.in);
 		// Point to pass something into it
@@ -58,24 +65,31 @@ public class player {
 				case "travel":
 					// Need to fix so player can't go out of bounds (working on rn)
 					
-					if (!movementUnlocked == true) {
+					if (movementUnlocked == true) {
 						if(commands[1].toLowerCase().equals("east")) { 
 							movement(1, 0);
+							System.out.println("You try move east 1 square");
 							}
 						else if (commands[1].toLowerCase().equals("west")) {
 							movement(-1, 0);
+							System.out.println("You try move west 1 square");
 							}
 						else if (commands[1].toLowerCase().equals("north")) {
 							movement(0, -1);
+							System.out.println("You try move north 1 square");
 							}
 						else if (commands[1].toLowerCase().equals("south")) {
 							movement(0, 1);
+							System.out.println("You try move south 1 square");
 							}
 						else {
 							System.out.println("You can't go " + commands[1]);
 						}
 						
 						break;
+					}
+					else {
+						System.out.println("The room is locked...\n walking into walls wont help you with English?");
 					}
 					
 				// Interaction
@@ -131,9 +145,43 @@ public class player {
 								break;
 							default:
 								System.out.println("If you see this message someone messed up the spelling and now the game is broken.\nHopefully you're not Mr Venz");
+								break;
 							}
+							
+						
+						case "j_block_key":
+							map.jblockUnlocked = true;
+							System.out.println("You use J block Key to unlock J Block");
+							turn ++;
 							break;
+						case "locker_code":
+							map.lockerUnlocked = true;
+							break;
+							
+						case "printer":
+							if (inventory.in("paper") && inventory.in("laptop")) {
+								inventory.add(map.returnInventory().get("unstapled_assignment"));
+								System.out.println("You load in your paper and press print...");
+								System.out.println("The printer prints your assignment for you");
+								System.out.println("Please use stapler to staple assignment. Oh wait you have no stapler on you");
+								System.out.println("But you left a stapler in your locker");
+								turn += 2;
+							} else if (inventory.in("paper") && inventory.in("laptop") == false) {
+								System.out.println("You load paper into the printer");
+								System.out.println("Wait... what are you printing? Where's your laptop?");
+								turn ++;
+							}
+							else {
+								System.out.println("You need to get some paper to print on");
+								System.out.println("Don't try break the printer... your english marks depend on it");
+								turn ++;
+							}
+							
+							break;
+							
+							
 						}
+						
 						//Call and command or something
 					}else {
 						switch(commands[1]) {
@@ -150,7 +198,8 @@ public class player {
 					if(commands[1].equals("minesweeper")) {
 						System.out.println("This is a debug command");
 						try {
-							new MineSweeperMain().mineSweeper(Integer.parseInt(commands[2]), Integer.parseInt(commands[3]), Integer.parseInt(commands[4]));
+							new MineSweeperMain();
+							game.MineSweeperMain.mineSweeper(Integer.parseInt(commands[2]), Integer.parseInt(commands[3]), Integer.parseInt(commands[4]));
 						} catch (Exception e) {
 							System.out.println("L wrong format.\nstart minesweeper WIDTH HEIGHT MINES_COUNT");
 						}
@@ -191,44 +240,49 @@ public class player {
 				// Limit up properly
 				playerLocation[0] = 0;
 				playerLocation[1] = 0;
+				//movementUnlocked = true;
 				
 				//TODO: fix up this
-				if (map.currentLevel+1 == 1 && map.jblockUnlocked == false) {
-					System.out.println("You arrive outside J block. You look around, but the door is locked");
-					System.out.println("Student service at A block won't be open this early, right?");
+				//if (map.currentLevel+1 == 1 && map.jblockUnlocked == false) {
+					//System.out.println("You arrive outside J block. You look around, but the door is locked");
+					//System.out.println("Student service at A block won't be open this early, right?");
+					//movementUnlocked = false;
 					//TODO: movement locked
-				}
-				else if (map.currentLevel+1 == 3 && map.lockerUnlocked == false) {
-					System.out.println("You run back to your locker on the other side of the school");
-					System.out.println("Then, you realize you forgot your locker password \n But you remember you stored it on your phone at least…");
-				}
-				map.currentLevel++;
-				System.out.println("You moved up a level to " + map.currentLevel);
+				//}
+				//else if (map.currentLevel+1 == 3 && map.lockerUnlocked == false) {
+					//System.out.println("You run back to your locker on the other side of the school");
+					//System.out.println("Then, you realize you forgot your locker password \n But you remember you stored it on your phone at least…");
+					//movementUnlocked = false;
+				//}
+				game.map.currentLevel++;
+				System.out.println("You moved up a level to " + game.map.currentLevel);
 				
 				
 				
 			}else if (commands[0].equals("down")) {
-				if (map.currentLevel > 0) {
+				if (game.map.currentLevel > 0) {
 					playerLocation[0] = 0;
 					playerLocation[1] = 0;
+					//movementUnlocked = true;
 					
-					if (map.currentLevel-1 == 1 && map.jblockUnlocked == false) {
-						System.out.println("You arrive outside J block. You look around, but the door is locked");
-						System.out.println("Student service at A block won't be open this early, right?");
-					}
-					else if (map.currentLevel-1 == 3 && map.lockerUnlocked == false) {
-						System.out.println("You run back to your locker on the other side of the school");
-						System.out.println("Then, you realize you forgot your locker password \n But you remember you stored it on your phone at least…");
-					}
-					map.currentLevel--;
-					System.out.println("You moved up a level to " + map.currentLevel);
+					//if (map.currentLevel-1 == 1 && map.jblockUnlocked == false) {
+						//System.out.println("You arrive outside J block. You look around, but the door is locked");
+						//System.out.println("Student service at A block won't be open this early, right?");
+						//movementUnlocked = false;
+					//}
+					//else if (map.currentLevel-1 == 3 && map.lockerUnlocked == false) {
+						//System.out.println("You run back to your locker on the other side of the school");
+						//System.out.println("Then, you realize you forgot your locker password \n But you remember you stored it on your phone at least…");
+						//movementUnlocked = false;
+					//}
+					game.map.currentLevel--;
+					System.out.println("You moved down a level to " + game.map.currentLevel);
 					
 					
 					
 				}else {
 					System.out.println("You can't go down you're not a miner.");
 				}
-				//TODO Remove this later this is for testing
 			}else if (commands[0].equals("debug")) {
 				Gamemain.debug = !Gamemain.debug;
 				System.out.println(Gamemain.debug);
