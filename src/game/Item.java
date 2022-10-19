@@ -3,12 +3,16 @@ package game;
 public class Item {
 	private String name;
 	private static boolean moveable;
+	private int x;
+	private int y;
 	//goes down and if its zero it magically disappears
 	private int maxUses;
 	private String id;
 	private String state;
 	
-	public Item(String itemName, String itemId, String itemState, boolean itemMoveable, int itemUses){
+	public Item(String itemName, String itemId, String itemState, boolean itemMoveable, int itemUses, int itemX, int itemY){
+		x = itemX;
+		y = itemY;
 		name = itemName;
 		moveable = itemMoveable;
 		maxUses = itemUses; 

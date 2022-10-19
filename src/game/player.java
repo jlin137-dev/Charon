@@ -81,13 +81,18 @@ public class player {
 				// Interaction
 					break;
 				case "grab":
-					if (map.returnInventory().in(commands[1])) {
-						System.out.println("You grab " + commands[1] + " from the ground and put it in your inventory.");
-						inventory.add(map.returnInventory().get(commands[1]));
+					String item = "";
+					for(int i = 1; i < commands.length - 1; i++) {
+						item = item + commands[i] + " ";
+					}
+					item = item + commands[commands.length - 1];
+					if (map.returnInventory().in(item)) {
+						System.out.println("You grab " + item + " from the ground and put it in your inventory.");
+						inventory.add(map.returnInventory().get(item));
 						// TODO remove from ground
 						map.remove(commands[1]);
 						turn++;
-					}else {
+					} else {
 						System.out.println("You can't grab " + commands[1] + " out of thin air.");
 					}
 					break;
@@ -175,10 +180,10 @@ public class player {
 			}else if (commands[0].equalsIgnoreCase("look")) {
 				// Looks and gets the objects around in the same room
 				if (map.returnInventory().length() == 0) {
-					System.out.println("The room you are in is very empty, there it no point looking for more stuff.");
+					System.out.println("The room you are in is very empty, there is no point looking for more stuff.");
 				}else {
 					//TODO fix dupe glitch
-					System.out.println(Arrays.toString(map.returnContents()));
+					System.out.println("The current room contains:\n" + String.join(", ",map.returnContents()));
 				}
 				
 			// current level vs player level?
@@ -246,16 +251,18 @@ public class player {
 			if (map.returnLevel()[playerLocation[1] + y][playerLocation[0] + x] == " ") {
 				// Only move if new location is empty and on map
 				if (x != 0 && playerLocation[0] + x <  map.returnLevel()[0].length && playerLocation[0] + x > -1) {
+					System.out.println(map.returnLevelMsg()[playerLocation[1] + y][playerLocation[0] + x]);
 					playerLocation[0] += x;
 					turn++;
 				}else {
 					// the x at the end is for debugging
 					//ngl idk why this is here i have no idea what would trigger it
 					if (x != 0) {
-						System.out.println("You can't walk off the out of the school you have a assignment to hand in. x");
+						System.out.println("You can't walk off the out of the school you have a assignment to hand in.");
 					}
 				}
 				if (y != 0 && playerLocation[1] + y < map.returnLevel().length && playerLocation[1] + y > -1) {
+					System.out.println(map.returnLevelMsg()[playerLocation[1] + y][playerLocation[0] + x]);
 					playerLocation[1] += y;
 					turn++;
 				}else {
@@ -265,8 +272,10 @@ public class player {
 						System.out.println("You can't walk off the out of the school you have a assignment to hand in.");
 					}
 				}
-			}else {
+			}else if (map.returnLevel()[playerLocation[1] + y][playerLocation[0] + x] == "█") {
 				System.out.println("Walking into walls won't help with your english.");
+			} else {
+				
 			}
 			
 		}
