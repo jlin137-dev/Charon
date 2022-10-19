@@ -9,7 +9,7 @@ public class map {
 	public boolean jblockUnlocked = false;
 	public boolean lockerUnlocked = false;
 	
-	public int currentLevel = 0;
+	public static int currentLevel = 0;
 	// L block
 	public String[][] level0 = {
 			{" ","|"," "," "," "," "," "," "},
@@ -74,14 +74,21 @@ public class map {
 	public Inventory level2Inventory = new Inventory(false);
 	public Inventory level3Inventory = new Inventory(false);
 	public Inventory level4Inventory = new Inventory(false);
+	// Hidden level that stores all the items player must unlock through other items
+	public Inventory LockedInventory = new Inventory(false);
 
 	public void init() {
 		// Add all the items and stuff here
 		level0Inventory.add(new Item("laptop", "lpt", "off", true, 99));
-		level0Inventory.add(new Item("printer", "1", "off", false, 99));
+		level0Inventory.add(new Item("printer", "1", "off", false, 10));
 		level1Inventory.add(new Item("paper", "ppr", "empty", true, 1));
-		level2Inventory.add(new Item ("J Block Key", "", "empty", true, 2));
-		level3Inventory.add(new Item ("Stapler", "", "usable", true, 2));
+		level2Inventory.add(new Item ("j_block_key", "", "empty", true, 2));
+		level3Inventory.add(new Item ("stapler", "", "usable", true, 2));
+		
+		LockedInventory.add(new Item ("unstapled_assignment", "", "usable", true, 2));
+		LockedInventory.add(new Item ("locker_code", "", "usable", true, 2));
+		LockedInventory.add(new Item ("charger", "", "usable", true, 2));
+		LockedInventory.add(new Item ("stapled_essay!", "", "usable", true, 2));
 	}
 
 	// Don't need it

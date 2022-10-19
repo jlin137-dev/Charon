@@ -142,9 +142,43 @@ public class player {
 								break;
 							default:
 								System.out.println("If you see this message someone messed up the spelling and now the game is broken.\nHopefully you're not Mr Venz");
+								break;
 							}
+							
+						
+						case "j_block_key":
+							map.jblockUnlocked = true;
+							System.out.println("You use J block Key to unlock J Block");
+							turn ++;
 							break;
+						case "locker_code":
+							map.lockerUnlocked = true;
+							break;
+							
+						case "printer":
+							if (inventory.in("paper") && inventory.in("laptop")) {
+								inventory.add(map.returnInventory().get("unstapled_assignment"));
+								System.out.println("You load in your paper and press print...");
+								System.out.println("The printer prints your assignment for you");
+								System.out.println("Please use stapler to staple assignment. Oh wait you have no stapler on you");
+								System.out.println("But you left a stapler in your locker");
+								turn += 2;
+							} else if (inventory.in("paper") && inventory.in("laptop") == false) {
+								System.out.println("You load paper into the printer");
+								System.out.println("Wait... what are you printing? Where's your laptop?");
+								turn ++;
+							}
+							else {
+								System.out.println("You need to get some paper to print on");
+								System.out.println("Don't try break the printer... your english marks depend on it");
+								turn ++;
+							}
+							
+							break;
+							
+							
 						}
+						
 						//Call and command or something
 					}else {
 						switch(commands[1]) {
