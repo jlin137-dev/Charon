@@ -37,7 +37,6 @@ public class story {
 		
 	}
 	public void readStory(int level, int x, int y){
-		System.out.println(1);
 		if (storyLocations.get(level +", " + x + ", " + y) != null) {
 			System.out.println(storyLocations.get(level +", " + x + ", " + y));
 		}
