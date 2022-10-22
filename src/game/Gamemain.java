@@ -15,9 +15,9 @@ public class Gamemain {
 		
 		//System.out.print(TextAnimation.Logo());														//Show ascii QASMT logo
 		//TextAnimation.LoadingBar(5000);																//Show loading bar
-		//System.out.println("\nHello Adventurer what is your name? ");
-		//player.name = scanner.nextLine().trim();
-		if(player.name == ""||player.name == null) player.name = "ирия"
+		System.out.println("\nHello Adventurer what is your name? ");
+		player.name = scanner.nextLine().trim();
+		if(player.name == ""||player.name == null) player.name = "student"
 				+ "";
 		System.out.println("Welcome, " + player.name + ", to the land of QASMT.");
 		// Init the locations and story

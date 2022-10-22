@@ -35,16 +35,17 @@ public class TextAnimation {
 	}
 	
 	public static void StatusBar(String name) {
-		String spaces = "   ";
+		String spaces = "";
 		if(name.length() < 15) {
+			spaces = "   ";
 			for(int i = 0; i < 15 - name.length(); i++) {
-				spaces = spaces + "";
+				spaces = spaces + " ";
 			}
 		} else {
 			name = name.substring(0, 15) + "...";
 		}
 		System.out.println(
-				  "   QASMT Game - " + name + "'s adventure                       " + spaces + "Time: " + "07:00" +
+				  "   QASMT Game - " + name + "'s adventure                  " + spaces + "Time: " + "07:00" +
 				"\n===========================================================================");
 	}
 }

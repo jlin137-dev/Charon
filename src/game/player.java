@@ -54,6 +54,7 @@ public class player {
 		// Split commands by space
 		String[] commands = input.split("\\s+");
 		//test print
+		TextAnimation.StatusBar(name);
 		//Check for the action
 		if (commands.length > 1) {
 			if (commands[1] != null) {
