@@ -6,6 +6,8 @@ import java.util.*;
  * 	Temporary main class should be deleted
  * 	Method will return `true` when the game is finished, and keep autorestarting itself if you die
  */
+//TODO after loosing make it reveal all mines
+//TODO afte certain number of losses tell user "use jimmy"
 public class MineSweeperMain {
 	public static void main(String[] args) {
 		boolean ms = mineSweeper(10, 8, 4);

@@ -49,13 +49,18 @@ public class player {
 		//Getting user input
 		Scanner scanner = new Scanner(System.in);
 		// Point to pass something into it
-		System.out.println();
-		String input = scanner.nextLine().trim();
+		String input = "";
+		input = scanner.nextLine().trim();
 		// Split commands by space
 		String[] commands = input.split("\\s+");
+		//test print
+		System.out.println(
+		  "   QASMT Game - " + name + "'s adventure                                    " + "Time: " + "07:00" +
+		"\n===========================================================================");
 		//Check for the action
 		if (commands.length > 1) {
 			if (commands[1] != null) {
+				String item = "";
 				switch(commands[0].toLowerCase()) {
 				// Movement
 				// TODO add they can enter wasd and it moves
@@ -91,7 +96,6 @@ public class player {
 				// Interaction
 					break;
 				case "grab":
-					String item = "";
 					for(int i = 1; i < commands.length - 1; i++) {
 						item = item + commands[i] + " ";
 					}
@@ -118,10 +122,14 @@ public class player {
 					
 					break;
 				case "use":
+					for(int i = 1; i < commands.length - 1; i++) {
+						item = item + commands[i] + " ";
+					}
+					item = item + commands[commands.length - 1];
 					// Check if the item exists in the player inventory
 					// Fix if player has nothing error
-					if (inventory.in(commands[1])) {
-						switch(commands[1].toLowerCase()) {
+					if (inventory.in(item)) {
+						switch(item.toLowerCase()) {
 						case "laptop":
 							Item laptop = inventory.get("laptop");
 							switch(laptop.state(null)) {
@@ -143,25 +151,26 @@ public class player {
 								System.out.println("If you see this message someone messed up the spelling and now the game is broken.\nHopefully you're not Mr Venz");
 								break;
 							}
-							
-						
-						case "j_block_key":
+							break;
+						case "j block key":
 							map.jblockUnlocked = true;
 							System.out.println("You use J block Key to unlock J Block");
 							turn ++;
 							break;
-						case "locker_code":
+						case "locker code":
 							map.lockerUnlocked = true;
 							break;
-							
+							//TODO fix item replace thing to state
 						case "printer":
 							if (inventory.in("paper") && inventory.in("laptop")) {
-								inventory.add(map.returnInventory().get("unstapled_assignment"));
-								System.out.println("You load in your paper and press print...");
-								System.out.println("The printer prints your assignment for you");
-								System.out.println("Please use stapler to staple assignment. Oh wait you have no stapler on you");
-								System.out.println("But you left a stapler in your locker");
-								turn += 2;
+								if(inventory.get("laptop").state(null) == "on") {
+									inventory.add(map.returnInventory().get("unstapled_assignment"));
+									System.out.println("You load in your paper and press print...");
+									System.out.println("The printer prints your assignment for you");
+									System.out.println("Please use stapler to staple assignment. Oh wait you have no stapler on you");
+									System.out.println("But you left a stapler in your locker");
+									turn += 2;
+								}
 							} else if (inventory.in("paper") && inventory.in("laptop") == false) {
 								System.out.println("You load paper into the printer");
 								System.out.println("Wait... what are you printing? Where's your laptop?");

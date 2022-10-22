@@ -1,4 +1,5 @@
 package game;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Gamemain {
@@ -16,13 +17,22 @@ public class Gamemain {
 		//TextAnimation.LoadingBar(5000);																//Show loading bar
 		//System.out.println("\nHello Adventurer what is your name? ");
 		//player.name = scanner.nextLine().trim();
-		//System.out.println("Welcome " + player.name + " to the land of QASMT.");
+		if(player.name == ""||player.name == null) player.name = "Stanley";
+		System.out.println("Welcome, " + player.name + ", to the land of QASMT.");
 		// Init the locations and story
 		//story story = new story();
 		//story.init();
 		
-		System.out.println("\nIt's Mondays morning 7:00 am, no one is at school yet.\nYour english assignment is due and it makes up a solid 60% of your grade.\nYou have finished it but you don't have a printer at home.\nYou enter the research centre in hopes to print it but when you try to \nprint,and error that makes your blood run cold appears.\nNO PAPER");
-		System.out.println("Type 'help' for help \n You remember there may be paper around the school");
+		System.out.println("\nIt's Monday morning, 7:00 am. The school is completely empty. Your"
+				+ "\nEnglish assignment is due at 8:30 am, and you spent the entire night"
+				+ "\ncramming completing it. You don't have a printer at home, so you arrive at"
+				+ "L block to print it.\nPress [ENTER] to continue...");
+        try {
+            int read = System.in.read(new byte[2]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+		System.out.println("The rest of the story which I haven't yet written");
 		// Game loop
 		while (player.alive || !(player.gameFinished)) {
 			player.action();
@@ -33,7 +43,6 @@ public class Gamemain {
 			}
 		}
 		scanner.close();
-		
 		System.out.println("You finally submit your english assignment...");
 		System.out.println("You look at your timetable:");
 		System.out.println("English");
