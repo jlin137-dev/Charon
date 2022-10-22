@@ -191,7 +191,12 @@ public class player {
 							System.out.println("You realise you just wasted half an hour");
 							turn += 30;
 							break;
-						
+						case "test":
+							Item test = inventory.get("test");
+							System.out.println("You used test");
+							test.use();
+							break;
+							
 						case "stapler":
 							if (inventory.in("unstapled assignment")) {
 								System.out.println("You staple your assignment");

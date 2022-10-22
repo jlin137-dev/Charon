@@ -33,7 +33,11 @@ public class Gamemain {
         } catch (IOException e) {
             e.printStackTrace();
         }
-		System.out.println("The rest of the story which I haven't yet written\nType in some command:");
+        System.out.println("You arrive in front of the printer, and hope it has paper");
+        System.out.println("But there are no paper... what are you going to print your assignment on now?");
+        System.out.println("\nYou remember there may be paper in other blocks around the school\n");
+		
+        System.out.println("The rest of the story which I haven't yet written\nType in some command(Type help for help): ");
 		// Game loop
 		while (player.alive || !(player.gameFinished)) {
 			player.action();
