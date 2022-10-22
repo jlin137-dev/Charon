@@ -54,9 +54,9 @@ public class player {
 		// Split commands by space
 		String[] commands = input.split("\\s+");
 		//test print
-		TextAnimation.StatusBar(name);
 		//Check for the action
 		if (commands.length > 1) {
+			TextAnimation.StatusBar(name);	//show status bar
 			if (commands[1] != null) {
 				String item = "";
 				switch(commands[0].toLowerCase()) {
@@ -67,7 +67,6 @@ public class player {
 				case "walk":
 				case "travel":
 					// Need to fix so player can't go out of bounds (working on rn)
-					
 					if (movementUnlocked == true) {
 						if(commands[1].toLowerCase().equals("east")) { 
 							movement(1, 0);
@@ -85,13 +84,10 @@ public class player {
 							System.out.println("You can't go " + commands[1]);
 						}
 						
-						break;
 					}
 					else {
 						System.out.println("The room is locked...\n walking into walls wont help you with English?");
 					}
-					
-				// Interaction
 					break;
 				case "grab":
 					for(int i = 1; i < commands.length - 1; i++) {
@@ -209,10 +205,6 @@ public class player {
 							}
 							turn ++;
 							break;
-							
-						
-						
-						
 						}
 						
 						//Call and command or something
@@ -244,11 +236,12 @@ public class player {
 				}
 			}
 		}else {
-			// This part needs to look better
-			if (commands[0].equalsIgnoreCase("inventory")) {
+			TextAnimation.StatusBar(name);	//show status bar
+			switch(commands[0].toLowerCase()) {
+			case "inventory":
 				System.out.println("Inventory: " + Arrays.toString(inventory.returnContents()));
-			}else if (commands[0].equalsIgnoreCase("help")) {
-				// Finish of this area with all the commands
+				break;
+			case "help":
 				System.out.println(
 						"Go print that English assignment! 60% of your term grade is on the line."
 						+ "\n\tFull list of avalible commands:"
@@ -261,7 +254,8 @@ public class player {
 						+ "\n\t* Look: Look around the room"
 						+ "\n\t* Drop + [ITEM]: Remove an item from your inventory"			
 						);
-			}else if (commands[0].equalsIgnoreCase("look")) {
+				break;
+			case "look":
 				// Looks and gets the objects around in the same room
 				if (map.returnInventory().length() == 0) {
 					System.out.println("The room you are in is very empty, there is no point looking for more stuff.");
@@ -269,14 +263,12 @@ public class player {
 					//TODO fix dupe glitch
 					System.out.println("The current room contains:\n" + String.join(", ",map.returnContents()));
 				}
-				
-			// current level vs player level?
-			}else if (commands[0].equals("up")) {
+				break;
+			case "up":
 				// Limit up properly
 				playerLocation[0] = 0;
 				playerLocation[1] = 0;
 				//movementUnlocked = true;
-				
 				//TODO: fix up this
 				//if (map.currentLevel+1 == 1 && map.jblockUnlocked == false) {
 					//System.out.println("You arrive outside J block. You look around, but the door is locked");
@@ -291,15 +283,12 @@ public class player {
 				//}
 				game.map.currentLevel++;
 				System.out.println("You moved up a level to " + game.map.currentLevel);
-				
-				
-				
-			}else if (commands[0].equals("down")) {
+				break;
+			case "down":
 				if (game.map.currentLevel > 0) {
 					playerLocation[0] = 0;
 					playerLocation[1] = 0;
 					//movementUnlocked = true;
-					
 					//if (map.currentLevel-1 == 1 && map.jblockUnlocked == false) {
 						//System.out.println("You arrive outside J block. You look around, but the door is locked");
 						//System.out.println("Student service at A block won't be open this early, right?");
@@ -312,24 +301,23 @@ public class player {
 					//}
 					game.map.currentLevel--;
 					System.out.println("You moved down a level to " + game.map.currentLevel);
-					
-					
-					
 				}else {
 					System.out.println("You can't go down you're not a miner.");
 				}
-			}else if (commands[0].equals("debug")) {
+				break;
+			case "debug": 
 				Gamemain.debug = !Gamemain.debug;
 				System.out.println(Gamemain.debug);
+				break;
+			default:
+				System.out.println("I don't know what " + commands[0]+ " means.");
+				break;
 			}
 			//TODO state of game
 			// inventory
 			// what rooms are unlocked
 			// what room you are in
 			// state of printers
-			else {
-				System.out.println("I don't know what " + commands[0]+ " means.");
-			}
 		}
 	}
 	// Moving the location of the player

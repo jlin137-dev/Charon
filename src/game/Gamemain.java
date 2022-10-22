@@ -23,12 +23,11 @@ public class Gamemain {
 		System.out.println("\nIt's Monday morning, 7:00 am. The school is completely empty. Your"
 				+ "\nEnglish assignment is due at 8:30 am, and you spent the entire night"
 				+ "\ncramming completing it. You don't have a printer at home, so you arrive"
-				+ "\nat L block to print it.\nPress [ENTER] to continue...");
+				+ "\nat L block in the morning to print it.\nPress [ENTER] to continue...");
 
         TextAnimation.EnterReturn();
-		System.out.println("You arrive in front of the printer, and hope it has paper");
-		System.out.println("But there are no paper... what are you going to print your assignment on now?");
-		System.out.println("\nYou remember there may be paper in other blocks around the school\n");
+        TextAnimation.StatusBar(player.name);
+		System.out.println("You've entered L block, and need to look for that printer.\nType 'help' if you're stuck");
         try {
             int read = System.in.read(new byte[2]);
         } catch (IOException e) {

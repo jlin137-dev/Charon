@@ -48,7 +48,7 @@ public class TextAnimation {
 			name = name.substring(0, 15) + "...";
 		}
 		System.out.println(
-				  "   QASMT Game - " + name + "'s adventure                  " + spaces + "Time: " + "07:00" +
+				  "   Level: " + map.currentLevel + " - " + name + "'s adventure                    " + spaces + "Time: " + "07:00" +
 				"\n===========================================================================");
 	}
 	public static void EnterReturn() {
