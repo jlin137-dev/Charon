@@ -44,6 +44,10 @@ public class Item {
 			maxUses--;
 			return true;
 		}
+		else {
+			this.state("broken");
+			System.out.println(this.state);
+		}
 		return false;
 	}
 }

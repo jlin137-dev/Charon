@@ -122,6 +122,8 @@ public class map {
 		level0Inventory.add(new Item("laptop", "lpt", "off", true, 99, 0, 0));
 		level0Inventory.add(new Item("printer", "1", "off", false, 10, 0, 0));
 		level0Inventory.add(new Item("circuit boards", "", "empty", true, 1, 0, 0));
+		level0Inventory.add(new Item("phone", "", "uncharged", true, 99, 0, 0));
+		level0Inventory.add(new Item("test", "", "uncharged", true, 2, 0, 0));
 		level1Inventory.add(new Item("paper", "ppr", "empty", true, 1, 0, 0));
 		level2Inventory.add(new Item ("j block key", "", "empty", true, 2, 0, 0));
 		level3Inventory.add(new Item ("stapler", "staple", "usable", true, 5, 0, 0));
