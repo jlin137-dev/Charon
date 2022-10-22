@@ -1,7 +1,7 @@
 package game;
 import java.util.*;
 
-/*	Minesweeper file
+/*	MineSweeper file
  * 	Run with `mineSweeper(width, height, total mines);`
  * 	Temporary main class should be deleted
  * 	Method will return `true` when the game is finished, and keep autorestarting itself if you die
@@ -9,10 +9,6 @@ import java.util.*;
 //TODO after loosing make it reveal all mines
 //TODO afte certain number of losses tell user "use jimmy"
 public class MineSweeperMain {
-	public static void main(String[] args) {
-		boolean ms = mineSweeper(10, 8, 4);
-	}
-	
 	//create variables
 	public static ArrayList<String> map = new ArrayList<String>();
 	public static ArrayList<String> mapShow = new ArrayList<String>();
@@ -209,8 +205,7 @@ public class MineSweeperMain {
 							movesCount++;
 							if(number.equals(mineChar)) {
 								System.out.println("You exploded on a mine! Wait a minute, why am I \nstill alive... And why did everything reset?\nPress ENTER to restart.");
-								Scanner scanner2 = new Scanner(System.in);
-								String input2 = scanner.nextLine().trim().toLowerCase();
+								TextAnimation.EnterReturn();
 								return mineSweeper(x, y, mines);
 							}
 						} else {

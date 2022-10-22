@@ -1,4 +1,7 @@
 package game;
+
+import java.io.IOException;
+
 public class TextAnimation {
 	public static void LoadingBar(int Delay) {
 		int length = 60;
@@ -47,5 +50,12 @@ public class TextAnimation {
 		System.out.println(
 				  "   QASMT Game - " + name + "'s adventure                  " + spaces + "Time: " + "07:00" +
 				"\n===========================================================================");
+	}
+	public static void EnterReturn() {
+		try {
+            System.in.read(new byte[2]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 }
