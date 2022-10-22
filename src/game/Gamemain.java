@@ -24,8 +24,17 @@ public class Gamemain {
 				+ "\nEnglish assignment is due at 8:30 am, and you spent the entire night"
 				+ "\ncramming completing it. You don't have a printer at home, so you arrive"
 				+ "\nat L block to print it.\nPress [ENTER] to continue...");
+
         TextAnimation.EnterReturn();
-		System.out.println("The rest of the story which I haven't yet written\nType in some command:");
+		System.out.println("You arrive in front of the printer, and hope it has paper");
+		System.out.println("But there are no paper... what are you going to print your assignment on now?");
+		System.out.println("\nYou remember there may be paper in other blocks around the school\n");
+        try {
+            int read = System.in.read(new byte[2]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
 		// Game loop
 		while (player.alive || !(player.gameFinished)) {
 			player.action();
