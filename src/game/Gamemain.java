@@ -7,7 +7,7 @@ public class Gamemain {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		player player = new player();
+		Player player = new Player();
 
 		//System.out.print(TextAnimation.Logo());														//Show ascii QASMT logo
 		//TextAnimation.LoadingBar(5000);																//Show loading bar

@@ -2,15 +2,15 @@ package game;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class player {
+public class Player {
 	// Variables
 	
 	// I'm sure you can figure out what this mean
 	public String name;
 	
-	private map map = new map();
+	private Map map = new Map();
 	
-	story story = new story();
+	Story story = new Story();
 	// Keeps tracks of how many actions the user has done
 	public int turn = 0;
 	
@@ -26,7 +26,7 @@ public class player {
 	public boolean alive = true;
 	public boolean gameFinished = false;
 	
-	public player(){
+	public Player(){
 		story.init();
 	}
 
@@ -34,10 +34,10 @@ public class player {
 	public void action() {
 		
 		boolean movementUnlocked = true;
-		if (game.map.currentLevel == 1 && map.jblockUnlocked == false) {
+		if (game.Map.currentLevel == 1 && map.jblockUnlocked == false) {
 				movementUnlocked = false;
 			}
-		else if (game.map.currentLevel == 3 && map.lockerUnlocked == false) {
+		else if (game.Map.currentLevel == 3 && map.lockerUnlocked == false) {
 				movementUnlocked = false;
 		}
 		else {
@@ -45,7 +45,7 @@ public class player {
 		}
 		
 		// Read what is happening TODO finish off the story and if there are any special locations
-		story.readStory(game.map.currentLevel, playerLocation[0], playerLocation[1]);
+		story.readStory(game.Map.currentLevel, playerLocation[0], playerLocation[1]);
 		//Getting user input
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("- ");
@@ -154,8 +154,6 @@ public class player {
 							}
 							laptop.use();
 							break;
-							
-							
 						case "j block key":
 							map.jblockUnlocked = true;
 							System.out.println("You use J block Key to unlock J Block");
@@ -239,8 +237,7 @@ public class player {
 							}
 							turn ++;
 							break;
-						}
-						
+						}						
 						//Call and command or something
 					}}else {
 						switch(commands[1]) {
@@ -253,7 +250,6 @@ public class player {
 							break;
 						}
 					}
-					
 					break;
 				case "start":
 					if(commands[1].equals("minesweeper")) {
@@ -272,12 +268,13 @@ public class player {
 				}
 			}
 		}else {
-			TextAnimation.StatusBar(name);	//show status bar
 			switch(commands[0].toLowerCase()) {
 			case "inventory":
+				TextAnimation.StatusBar(name);	//show status bar
 				System.out.println("Inventory: " + Arrays.toString(inventory.returnContents()));
 				break;
 			case "help":
+				TextAnimation.StatusBar(name);	//show status bar
 				System.out.println(
 						"Go print that English assignment! 60% of your term grade is on the line."
 						+ "\nFull list of avalible commands:"
@@ -292,6 +289,7 @@ public class player {
 						);
 				break;
 			case "look":
+				TextAnimation.StatusBar(name);	//show status bar
 				if (movementUnlocked == true) {
 				// Looks and gets the objects around in the same room
 				if (map.returnInventory().length() == 0) {
@@ -321,11 +319,12 @@ public class player {
 					//System.out.println("Then, you realize you forgot your locker password \n But you remember you stored it on your phone at least…");
 					//movementUnlocked = false;
 				//}
-				game.map.currentLevel++;
-				System.out.println("You moved up a level to " + game.map.currentLevel);
+				game.Map.currentLevel++;
+				TextAnimation.StatusBar(name);	//show status bar
+				System.out.println("You moved up a level to " + game.Map.currentLevel);
 				break;
 			case "down":
-				if (game.map.currentLevel > 0) {
+				if (game.Map.currentLevel > 0) {
 					playerLocation[0] = 0;
 					playerLocation[1] = 0;
 					//movementUnlocked = true;
@@ -339,8 +338,9 @@ public class player {
 						//System.out.println("Then, you realize you forgot your locker password \n But you remember you stored it on your phone at least…");
 						//movementUnlocked = false;
 					//}
-					game.map.currentLevel--;
-					System.out.println("You moved down a level to " + game.map.currentLevel);
+					game.Map.currentLevel--;
+					TextAnimation.StatusBar(name);	//show status bar
+					System.out.println("You moved down a level to " + game.Map.currentLevel);
 				}else {
 					System.out.println("You can't go down you're not a miner.");
 				}

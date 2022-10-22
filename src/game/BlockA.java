@@ -1,6 +1,6 @@
 package game;
 
-public class blockA {
+public class BlockA {
 
 	
 	public static void main (String[] args) {

@@ -1,8 +1,8 @@
 package game;
 
-public class map {
+public class Map {
 	
-	public map(){
+	public Map(){
 		this.init();
 	}
 	

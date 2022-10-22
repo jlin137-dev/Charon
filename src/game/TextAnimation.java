@@ -48,7 +48,7 @@ public class TextAnimation {
 			name = name.substring(0, 15) + "...";
 		}
 		System.out.println(
-				  "   Level: " + map.currentLevel + " - " + name + "'s adventure                    " + spaces + "Time: " + "07:00" +
+				  "   Level: " + Map.currentLevel + " - " + name + "'s adventure                    " + spaces + "Time: " + "07:00" +
 				"\n===========================================================================");
 	}
 	public static void EnterReturn() {

@@ -1,7 +1,7 @@
 package game;
 import java.util.HashMap;
 
-public class story {
+public class Story {
 	
 	private static HashMap<String, String> storyLocations = new HashMap<String, String>();
 	
