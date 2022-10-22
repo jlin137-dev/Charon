@@ -245,19 +245,16 @@ public class player {
 			}else if (commands[0].equalsIgnoreCase("help")) {
 				// Finish of this area with all the commands
 				System.out.println(
-						"\n\n if you manage to break your laptop, the school printer or something, good job, you can't hand in your english assignment anymore"
-						
-						+ "\n Restart the game \n \n"
-						+ ""
-						+"Avalible commands:"
+						""
+						+ "Full list of avalible commands:"
 						+ "\n\t* Go + [NESW]: Allows you to move within the level, up being north"
 						+"\n\t* Up/ Down: Allows you to move across levels, like in a skyscraper"
 						+ "\n\t* Grab + [ITEM]: Picks up the item and put it in your inventory"
 						+ "\n\t* Use + [ITEM]: Use an item in your inventory. This may get rid of"
 						+ "\n\tanother item in your inventory"
 						+ "\n\t* Inventory: Check your inventory"
-						+"\n\t* Look: Look around the room"
-						+"\n\t* Drop + [ITEM]: Remove an item from your inventory"			
+						+ "\n\t* Look: Look around the room"
+						+ "\n\t* Drop + [ITEM]: Remove an item from your inventory"			
 						);
 			}else if (commands[0].equalsIgnoreCase("look")) {
 				// Looks and gets the objects around in the same room
