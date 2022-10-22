@@ -124,12 +124,13 @@ public class map {
 		level0Inventory.add(new Item("circuit boards", "", "empty", true, 1, 0, 0));
 		level1Inventory.add(new Item("paper", "ppr", "empty", true, 1, 0, 0));
 		level2Inventory.add(new Item ("j block key", "", "empty", true, 2, 0, 0));
-		level3Inventory.add(new Item ("stapler", "", "usable", true, 2, 0, 0));
+		level3Inventory.add(new Item ("stapler", "staple", "usable", true, 5, 0, 0));
 		
 		LockedInventory.add(new Item ("unstapled assignment", "", "usable", true, 2, 0, 0));
 		LockedInventory.add(new Item ("locker code", "", "usable", true, 2, 0, 0));
 		LockedInventory.add(new Item ("charger", "", "usable", true, 2, 0, 0));
-		LockedInventory.add(new Item ("stapled essay", "", "usable", true, 2, 0, 0));
+		LockedInventory.add(new Item (""
+				+ "", "", "usable", true, 2, 0, 0));
 	}
 	// Don't need it
 	public void printMap() {

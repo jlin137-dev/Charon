@@ -145,6 +145,7 @@ public class player {
 								}
 								break;
 							case "broken":
+								System.out.println("The laptop breaks. \n\n\n");
 								System.out.println("How the h");
 								break;
 							default:
@@ -152,25 +153,27 @@ public class player {
 								break;
 							}
 							break;
+							
+							
 						case "j block key":
 							map.jblockUnlocked = true;
 							System.out.println("You use J block Key to unlock J Block");
 							turn ++;
 							break;
 						case "locker code":
+							System.out.println("You type the locker code... The locker unlocks");
 							map.lockerUnlocked = true;
 							break;
 							//TODO fix item replace thing to state
 						case "printer":
-							if (inventory.in("paper") && inventory.in("laptop")) {
-								if(inventory.get("laptop").state(null) == "on") {
-									inventory.add(map.returnInventory().get("unstapled_assignment"));
+							if (inventory.in("paper") && inventory.in("laptop") && inventory.get("laptop").state(null) == "on") {
+									inventory.add(map.returnInventory().get("unstapled assignment"));
 									System.out.println("You load in your paper and press print...");
 									System.out.println("The printer prints your assignment for you");
 									System.out.println("Please use stapler to staple assignment. Oh wait you have no stapler on you");
 									System.out.println("But you left a stapler in your locker");
 									turn += 2;
-								}
+									
 							} else if (inventory.in("paper") && inventory.in("laptop") == false) {
 								System.out.println("You load paper into the printer");
 								System.out.println("Wait... what are you printing? Where's your laptop?");
@@ -181,10 +184,32 @@ public class player {
 								System.out.println("Don't try break the printer... your english marks depend on it");
 								turn ++;
 							}
-							
 							break;
 							
+						case "cricuit boards":
+							System.out.println("Ouuuuuuch..........");
+							System.out.println(". \n\n\n");
+							System.out.println("You wake up... did you electrute yourself?");
+							System.out.println("You realise you just wasted half an hour");
+							turn += 30;
+							break;
+						
+						case "stapler":
+							if (inventory.in("unstapled assignment")) {
+								System.out.println("You staple your assignment");
+								System.out.println("There, a printed, stapled assignment read for submission");
+								inventory.add(map.returnInventory().get("stapled essay"));
+							}
+							else {
+								System.out.println("You don't have the printed assignment to staple");
+								System.out.println("You waste 1 of your 2 precious staples");
+							}
+							turn ++;
+							break;
 							
+						
+						
+						
 						}
 						
 						//Call and command or something
@@ -221,7 +246,12 @@ public class player {
 				System.out.println("Inventory: " + Arrays.toString(inventory.returnContents()));
 			}else if (commands[0].equalsIgnoreCase("help")) {
 				// Finish of this area with all the commands
-				System.out.println("Avalible commands:"
+				System.out.println(
+						"\n\n if you manage to break your laptop, the school printer or something, good job, you can't hand in your english assignment anymore"
+						
+						+ "\n Restart the game \n \n"
+						+ ""
+						+"Avalible commands:"
 						+ "\n\t* Go + [NESW]: Allows you to move within the level, up being north"
 						+"\n\t* Up/ Down: Allows you to move across levels, like in a skyscraper"
 						+ "\n\t* Grab + [ITEM]: Picks up the item and put it in your inventory"
@@ -229,7 +259,7 @@ public class player {
 						+ "\n\tanother item in your inventory"
 						+ "\n\t* Inventory: Check your inventory"
 						+"\n\t* Look: Look around the room"
-						+"\n\t* Drop + [ITEM]: Remove an item from your inventory"
+						+"\n\t* Drop + [ITEM]: Remove an item from your inventory"			
 						);
 			}else if (commands[0].equalsIgnoreCase("look")) {
 				// Looks and gets the objects around in the same room

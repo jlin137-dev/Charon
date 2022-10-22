@@ -17,7 +17,8 @@ public class Gamemain {
 		//TextAnimation.LoadingBar(5000);																//Show loading bar
 		//System.out.println("\nHello Adventurer what is your name? ");
 		//player.name = scanner.nextLine().trim();
-		if(player.name == ""||player.name == null) player.name = "Stanley";
+		if(player.name == ""||player.name == null) player.name = "ирия"
+				+ "";
 		System.out.println("Welcome, " + player.name + ", to the land of QASMT.");
 		// Init the locations and story
 		//story story = new story();
