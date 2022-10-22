@@ -48,6 +48,7 @@ public class player {
 		story.readStory(game.map.currentLevel, playerLocation[0], playerLocation[1]);
 		//Getting user input
 		Scanner scanner = new Scanner(System.in);
+		System.out.print("- ");
 		// Point to pass something into it
 		String input = "";
 		input = scanner.nextLine().trim();
@@ -332,8 +333,6 @@ public class player {
 					playerLocation[0] += x;
 					turn++;
 				}else {
-					// the x at the end is for debugging
-					//ngl idk why this is here i have no idea what would trigger it
 					if (x != 0) {
 						System.out.println("You can't walk off the out of the school you have a assignment to hand in.");
 					}
@@ -345,7 +344,6 @@ public class player {
 				}else {
 					//ngl idk why this is here
 					if (y != 0) {
-						// the y at the end is for debugging
 						System.out.println("You can't walk off the out of the school you have a assignment to hand in.");
 					}
 				}

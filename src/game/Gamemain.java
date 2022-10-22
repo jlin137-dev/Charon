@@ -28,12 +28,6 @@ public class Gamemain {
         TextAnimation.EnterReturn();
         TextAnimation.StatusBar(player.name);
 		System.out.println("You've entered L block, and need to look for that printer.\nType 'help' if you're stuck");
-        try {
-            int read = System.in.read(new byte[2]);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
 		// Game loop
 		while (player.alive || !(player.gameFinished)) {
 			player.action();
