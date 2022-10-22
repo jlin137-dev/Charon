@@ -25,14 +25,14 @@ public class Gamemain {
 		
 		System.out.println("\nIt's Monday morning, 7:00 am. The school is completely empty. Your"
 				+ "\nEnglish assignment is due at 8:30 am, and you spent the entire night"
-				+ "\ncramming completing it. You don't have a printer at home, so you arrive at"
-				+ "L block to print it.\nPress [ENTER] to continue...");
+				+ "\ncramming completing it. You don't have a printer at home, so you arrive"
+				+ "\nat L block to print it.\nPress [ENTER] to continue...");
         try {
             int read = System.in.read(new byte[2]);
         } catch (IOException e) {
             e.printStackTrace();
         }
-		System.out.println("The rest of the story which I haven't yet written");
+		System.out.println("The rest of the story which I haven't yet written\nType in some command:");
 		// Game loop
 		while (player.alive || !(player.gameFinished)) {
 			player.action();
