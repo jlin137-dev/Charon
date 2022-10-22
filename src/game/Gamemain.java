@@ -20,7 +20,7 @@ public class Gamemain {
 		//story story = new story();
 		//story.init();
 		
-		System.out.println("\nIt's Monday morning, 7:00 am. The school is completely empty. Your"
+		System.out.println("It's Monday morning, 7:00 am. The school is completely empty. Your"
 				+ "\nEnglish assignment is due at 8:30 am, and you spent the entire night"
 				+ "\ncramming completing it. You don't have a printer at home, so you arrive"
 				+ "\nat L block in the morning to print it.\nPress [ENTER] to continue...");

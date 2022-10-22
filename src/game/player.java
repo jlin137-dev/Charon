@@ -245,7 +245,7 @@ public class player {
 			case "help":
 				System.out.println(
 						"Go print that English assignment! 60% of your term grade is on the line."
-						+ "\n\tFull list of avalible commands:"
+						+ "\nFull list of avalible commands:"
 						+ "\n\t* Go + [NESW]: Allows you to move within the level, up being north"
 						+ "\n\t* Up/ Down: Allows you to move across levels, like in a skyscraper"
 						+ "\n\t* Grab + [ITEM]: Picks up the item and put it in your inventory"
