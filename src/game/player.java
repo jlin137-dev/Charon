@@ -91,6 +91,7 @@ public class player {
 					}
 					break;
 				case "grab":
+					if (movementUnlocked == true) {
 					for(int i = 1; i < commands.length - 1; i++) {
 						item = item + commands[i] + " ";
 					}
@@ -104,6 +105,9 @@ public class player {
 					} else {
 						System.out.println("You can't grab " + commands[1] + " out of thin air.");
 					}
+					} else {
+						System.out.println("The room is locked. Read the instructions again");
+					}
 					break;
 				case "drop":
 					if (inventory.in(commands[1])) {
@@ -116,6 +120,7 @@ public class player {
 					}
 					
 					break;
+				
 				case "use":
 					for(int i = 1; i < commands.length - 1; i++) {
 						item = item + commands[i] + " ";
@@ -147,6 +152,7 @@ public class player {
 								System.out.println("If you see this message someone messed up the spelling and now the game is broken.\nHopefully you're not Mr Venz");
 								break;
 							}
+							laptop.use();
 							break;
 							
 							
@@ -161,27 +167,54 @@ public class player {
 							break;
 							//TODO fix item replace thing to state
 						case "printer":
-							if (inventory.in("paper") && inventory.in("laptop") && inventory.get("laptop").state(null) == "on") {
-									inventory.add(map.returnInventory().get("unstapled assignment"));
-									System.out.println("You load in your paper and press print...");
-									System.out.println("The printer prints your assignment for you");
-									System.out.println("Please use stapler to staple assignment. Oh wait you have no stapler on you");
-									System.out.println("But you left a stapler in your locker");
-									turn += 2;
-									
-							} else if (inventory.in("paper") && inventory.in("laptop") == false) {
-								System.out.println("You load paper into the printer");
-								System.out.println("Wait... what are you printing? Where's your laptop?");
+							Item printer = inventory.get("printer");
+							switch(printer.state(null)) {
+							case "on":
+								if (inventory.in("paper") && inventory.in("laptop") && inventory.get("laptop").state(null) == "on") {
+										inventory.add(map.returnInventory().get("unstapled assignment"));
+										System.out.println("You load in your paper and press print...");
+										System.out.println("The printer prints your assignment for you");
+										System.out.println("Please use stapler to staple assignment. Oh wait you have no stapler on you");
+										System.out.println("But you left a stapler in your locker");
+										turn += 2;
+										
+								}else if (inventory.in("paper") && inventory.in("laptop") && inventory.get("laptop").state(null) == "off") {
+									System.out.println("Wait... what are you printing? Your laptop is off");
+									System.out.println("Use the laptop to turn it on");
+									turn ++;
+								}
+								else if (inventory.in("paper") && inventory.in("laptop") == false) {
+									System.out.println("You load paper into the printer");
+									System.out.println("Wait... what are you printing? Where is your laptop?");
+									turn ++;
+								}
+								else {
+									System.out.println("Error: No paper...");
+									System.out.println("You need to get some paper to print on");
+									System.out.println("Don't try break the printer... your english marks depend on it");
+									turn ++;
+								}
+								printer.use();
+								break;
+							case "off":
+								System.out.println("You turn on the printer.");
+								printer.state("on");
 								turn ++;
-							}
-							else {
-								System.out.println("You need to get some paper to print on");
-								System.out.println("Don't try break the printer... your english marks depend on it");
-								turn ++;
-							}
-							break;
-							
-						case "cricuit boards":
+								break;
+							case "broken":
+								System.out.println("You try printing yet again");
+								System.out.println("The printer suddenly stops printing");
+								System.out.println("Wait... why can you smell smoke!?");
+								System.out.println("The printer catches fire.");
+								System.out.println("You race to switch off the L block power supply. The printer stops burning");
+								System.out.println("All power supply to the block is cut. Including Wifi");
+								System.out.println("Have fun waiting for the maintanence crew to get on shift, you are not printing until then");
+								System.out.println("And for your english assignment? well you can't print it now can you?");
+								System.out.println("Try turning this file off and on again");
+								break;
+								
+								
+							case "cricuit boards":
 							System.out.println("Ouuuuuuch..........");
 							System.out.println(". \n\n\n");
 							System.out.println("You wake up... did you electrute yourself?");
@@ -209,12 +242,14 @@ public class player {
 						}
 						
 						//Call and command or something
-					}else {
+					}}else {
 						switch(commands[1]) {
 						case "":
 							break;
 						default:
 							System.out.println("You search through your laptop bag but " + commands[1] + " isn't there.");
+							System.out.println("Searching for nothing costs time you can use to hand in english, you know");
+							turn ++;
 							break;
 						}
 					}
@@ -257,12 +292,16 @@ public class player {
 						);
 				break;
 			case "look":
+				if (movementUnlocked == true) {
 				// Looks and gets the objects around in the same room
 				if (map.returnInventory().length() == 0) {
 					System.out.println("The room you are in is very empty, there is no point looking for more stuff.");
 				}else {
 					//TODO fix dupe glitch
 					System.out.println("The current room contains:\n" + String.join(", ",map.returnContents()));
+				}
+				}else {
+					System.out.println("You try looking at the room but the door is locked");
 				}
 				break;
 			case "up":
