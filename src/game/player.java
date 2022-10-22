@@ -245,10 +245,10 @@ public class player {
 			}else if (commands[0].equalsIgnoreCase("help")) {
 				// Finish of this area with all the commands
 				System.out.println(
-						""
-						+ "Full list of avalible commands:"
+						"Go print that English assignment! 60% of your term grade is on the line."
+						+ "\n\tFull list of avalible commands:"
 						+ "\n\t* Go + [NESW]: Allows you to move within the level, up being north"
-						+"\n\t* Up/ Down: Allows you to move across levels, like in a skyscraper"
+						+ "\n\t* Up/ Down: Allows you to move across levels, like in a skyscraper"
 						+ "\n\t* Grab + [ITEM]: Picks up the item and put it in your inventory"
 						+ "\n\t* Use + [ITEM]: Use an item in your inventory. This may get rid of"
 						+ "\n\tanother item in your inventory"
