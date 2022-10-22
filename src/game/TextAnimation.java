@@ -34,7 +34,17 @@ public class TextAnimation {
 				+ "  Loading...\n";
 	}
 	
-	public static void StatusBar() {
-		//System.out.println(player.name + "");
+	public static void StatusBar(String name) {
+		String spaces = "   ";
+		if(name.length() < 15) {
+			for(int i = 0; i < 15 - name.length(); i++) {
+				spaces = spaces + "";
+			}
+		} else {
+			name = name.substring(0, 15) + "...";
+		}
+		System.out.println(
+				  "   QASMT Game - " + name + "'s adventure                       " + spaces + "Time: " + "07:00" +
+				"\n===========================================================================");
 	}
 }

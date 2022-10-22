@@ -54,9 +54,6 @@ public class player {
 		// Split commands by space
 		String[] commands = input.split("\\s+");
 		//test print
-		System.out.println(
-		  "   QASMT Game - " + name + "'s adventure                                    " + "Time: " + "07:00" +
-		"\n===========================================================================");
 		//Check for the action
 		if (commands.length > 1) {
 			if (commands[1] != null) {
