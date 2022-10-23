@@ -145,10 +145,17 @@ public class Player {
 					if (map.returnInventory().in(item)) {
 						System.out.println("You grab " + item + " from the ground and put it in your inventory.");
 						inventory.add(map.returnInventory().get(item));
-						// TODO remove from ground
 						map.remove(commands[1]);
 						turn++;
-					} else {
+					} else if(item.toLowerCase().equals("all")) {
+						System.out.println("You grab everything from the room. But something maybe left so double check.");
+						for (int i = 0; i < map.returnContents().length; i++) {
+							inventory.add(map.returnInventory().get(i));
+							map.remove(map.returnContents()[i]);
+						}
+						inventory.add(map.returnInventory().get(item));
+					}
+					else {
 						System.out.println("You can't grab '" + item + "' out of thin air.");
 					}
 					} else {
