@@ -27,20 +27,30 @@ public class Gamemain {
         TextAnimation.StatusBar(player.name);
 		System.out.println("You've entered L block, and need to look for that printer.\nType 'help' if you're stuck");
 		// Game loop
-		while (player.alive || !(player.gameFinished)) {
+		while (player.alive || (player.gameFinished) == false) {
 			player.action();
 			//story.readStory(player.playerLevel,player.playerLocation[0],player.playerLocation[1]);
 			//debugging
 			if(debug == true) {
 				System.out.println("\nLevel: " + String.valueOf(player.playerLevel) + "\nCoords: " + String.valueOf(player.playerLocation[0]) + " " + String.valueOf(player.playerLocation[1]) + "\nTurns: " + String.valueOf(player.turn)); 
 			}
+			if (player.gameFinished == true) {
+				break;
+			}
 		}
 		scanner.close();
+		if (player.EnglishSubmitted == false) {
+			System.out.println("Yes, 60% of your english grade really did go down the drain");
+			System.out.println("Welcome to QA~!");
+			System.out.println("Game over");
+		}
+		else {
 		System.out.println("You finally submit your english assignment...");
 		System.out.println("You look at your timetable:");
 		System.out.println("English");
 		System.out.println("...");
 		System.out.println("\n\n\n You win.");
+		}
 	}
 
 }
