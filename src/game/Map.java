@@ -126,7 +126,7 @@ public class Map {
 		level0Inventory.add(new Item("test", "", "uncharged", true, 2, 0, 0));
 		level1Inventory.add(new Item("paper", "ppr", "empty", true, 1, 0, 0));
 		level2Inventory.add(new Item ("j block key", "", "empty", true, 2, 0, 0));
-		level3Inventory.add(new Item ("stapler", "staple", "usable", true, 5, 0, 0));
+		level3Inventory.add(new Item ("stapler", "staple", "usable", true, 3, 0, 0));
 		
 		LockedInventory.add(new Item ("unstapled assignment", "", "usable", true, 2, 0, 0));
 		LockedInventory.add(new Item ("locker code", "", "usable", true, 2, 0, 0));

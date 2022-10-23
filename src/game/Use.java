@@ -33,7 +33,7 @@ public class Use {
 			case "j block key":
 				map.jblockUnlocked = true;
 				System.out.println("You use J block Key to unlock J Block");
-				turn ++;
+				Player.turn ++;
 				break;
 			case "locker code":
 				System.out.println("You type the locker code... The locker unlocks");
@@ -43,58 +43,62 @@ public class Use {
 			case "printer":
 				Item printer = inventory.get("printer");
 				switch(printer.state(null)) {
-				case "on":
-					if (inventory.in("paper") && inventory.in("laptop") && inventory.get("laptop").state(null) == "on") {
-							inventory.add(map.returnInventory().get("unstapled assignment"));
-							System.out.println("You load in your paper and press print...");
-							System.out.println("The printer prints your assignment for you");
-							System.out.println("Please use stapler to staple assignment. Oh wait you have no stapler on you");
-							System.out.println("But you left a stapler in your locker");
-							turn += 2;
-							
-					}else if (inventory.in("paper") && inventory.in("laptop") && inventory.get("laptop").state(null) == "off") {
-						System.out.println("Wait... what are you printing? Your laptop is off");
-						System.out.println("Use the laptop to turn it on");
-						turn ++;
-					}
-					else if (inventory.in("paper") && inventory.in("laptop") == false) {
-						System.out.println("You load paper into the printer");
-						System.out.println("Wait... what are you printing? Where is your laptop?");
-						turn ++;
-					}
-					else {
-						System.out.println("Error: No paper...");
-						System.out.println("You need to get some paper to print on");
-						System.out.println("Don't try break the printer... your english marks depend on it");
-						turn ++;
-					}
-					printer.use();
-					break;
-				case "off":
-					System.out.println("You turn on the printer.");
-					printer.state("on");
-					turn ++;
-					break;
-				case "broken":
-					System.out.println("You try printing yet again");
-					System.out.println("The printer suddenly stops printing");
-					System.out.println("Wait... why can you smell smoke!?");
-					System.out.println("The printer catches fire.");
-					System.out.println("You race to switch off the L block power supply. The printer stops burning");
-					System.out.println("All power supply to the block is cut. Including Wifi");
-					System.out.println("Have fun waiting for the maintanence crew to get on shift, you are not printing until then");
-					System.out.println("And for your english assignment? well you can't print it now can you?");
-					System.out.println("Try turning this file off and on again");
-					break;
-					
-					
-				case "cricuit boards":
-				System.out.println("Ouuuuuuch..........");
-				System.out.println(". \n\n\n");
-				System.out.println("You wake up... did you electrute yourself?");
-				System.out.println("You realise you just wasted half an hour");
-				turn += 30;
+					case "on":
+						if (inventory.in("paper") && inventory.in("laptop") && inventory.get("laptop").state(null) == "on") {
+								inventory.add(map.returnInventory().get("unstapled assignment"));
+								System.out.println("You load in your paper and press print...");
+								System.out.println("The printer prints your assignment for you");
+								System.out.println("Please use stapler to staple assignment. Oh wait you have no stapler on you");
+								System.out.println("But you left a stapler in your locker");
+								Player.turn += 2;
+								
+						}else if (inventory.in("paper") && inventory.in("laptop") && inventory.get("laptop").state(null) == "off") {
+							System.out.println("Wait... what are you printing? Your laptop is off");
+							System.out.println("Use the laptop to turn it on");
+							Player.turn ++;
+						}
+						else if (inventory.in("paper") && inventory.in("laptop") == false) {
+							System.out.println("You load paper into the printer");
+							System.out.println("Wait... what are you printing? Where is your laptop?");
+							Player.turn ++;
+						}
+						else {
+							System.out.println("Error: No paper...");
+							System.out.println("You need to get some paper to print on");
+							System.out.println("Don't try break the printer... your english marks depend on it");
+							Player.turn ++;
+						}
+						printer.use();
+						break;
+					case "off":
+						System.out.println("You turn on the printer.");
+						printer.state("on");
+						Player.turn ++;
+						break;
+					case "broken":
+						System.out.println("You try printing yet again");
+						System.out.println("The printer suddenly stops printing");
+						System.out.println("Wait... why can you smell smoke!?");
+						System.out.println("The printer catches fire.");
+						System.out.println("You race to switch off the L block power supply. The printer stops burning");
+						System.out.println("All power supply to the block is cut. Including Wifi");
+						System.out.println("Have fun waiting for the maintanence crew to get on shift, you are not printing until then");
+						System.out.println("And for your english assignment? well you can't print it now can you?");
+						System.out.println("Try turning this file off and on again");
+						break;
+				}
 				break;
+					
+
+				
+				case "circuit boards":
+					System.out.println("Ouuuuuuch..........");
+					System.out.println(". \n\n\n");
+					System.out.println("You wake up... did you electrute yourself?");
+					System.out.println("You realise you just wasted half an hour");
+					Player.turn += 30;
+				break;
+				
 			case "test":
 				Item test = inventory.get("test");
 				System.out.println("You used test");
@@ -111,9 +115,9 @@ public class Use {
 					System.out.println("You don't have the printed assignment to staple");
 					System.out.println("You waste 1 of your 2 precious staples");
 				}
-				turn ++;
+				Player.turn ++;
 				break;
-			}						
+		
 			//Call and command or something
 		}}else {
 			switch(item) {
@@ -122,7 +126,7 @@ public class Use {
 			default:
 				System.out.println("You search through your laptop bag but " + item + " isn't there.");
 				System.out.println("Searching for nothing costs time you can use to hand in english, you know");
-				turn ++;
+				Player.turn ++;
 				break;
 			}
 		}
