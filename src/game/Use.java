@@ -5,6 +5,7 @@ public class Use {
 		Inventory inventory = Player.inventory;
 		int turn = Player.turn;
 		if (inventory.in(item)) {
+			System.out.println("Testing");
 			switch(item.toLowerCase()) {
 			case "laptop":
 				Item laptop = inventory.get("laptop");

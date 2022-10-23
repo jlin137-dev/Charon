@@ -67,6 +67,9 @@ public class Player {
 			}
 		else if (game.Map.currentLevel == 3 && map.lockerUnlocked == false) {
 				movementUnlocked = false;
+		} else if (game.Map.currentLevel == 4 && map.OvalCleared == true) {
+			movementUnlocked = false;
+			System.out.println("The oval is clear! Let's print your english assignment");
 		}
 		else {
 			movementUnlocked = true;
@@ -78,6 +81,15 @@ public class Player {
 			System.out.println("Game over");
 			gameFinished = true;
 			EnglishSubmitted = false;
+		}
+		
+		if (game.Map.currentLevel == 4 && playerLocation[1] == 2) {
+			game.MineSweeperMain.mineSweeper(8, 8, 10);
+			System.out.println("The oval is unmined. You dig around for a bit, and find your charger!");
+			System.out.println("You leave the oval, and lock the door to its entrance");
+			map.OvalCleared = true;
+			inventory.add(map.returnInventory().get("charger"));
+			playerLocation[1] = 0;
 		}
 		
 		// Read what is happening
@@ -227,6 +239,9 @@ public class Player {
 				//}
 				game.Map.currentLevel++;
 				TextAnimation.StatusBar(name);	//show status bar
+				map.jblockUnlocked = false;
+				map.jblockUnlocked = false;
+				System.out.println("You lock all doors behind you");
 				System.out.println("You moved up a level to " + game.Map.currentLevel);
 				break;
 			case "down":
@@ -246,6 +261,9 @@ public class Player {
 					//}
 					game.Map.currentLevel--;
 					TextAnimation.StatusBar(name);	//show status bar
+					map.jblockUnlocked = false;
+					map.jblockUnlocked = false;
+					System.out.println("You lock all doors behind you");
 					System.out.println("You moved down a level to " + game.Map.currentLevel);
 				}else {
 					System.out.println("You can't go down you're not a miner.");

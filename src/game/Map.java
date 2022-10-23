@@ -8,6 +8,7 @@ public class Map {
 	
 	public boolean jblockUnlocked = false;
 	public boolean lockerUnlocked = false;
+	public boolean OvalCleared = false;
 	
 	public static int currentLevel = 0;
 	// L block
@@ -131,8 +132,7 @@ public class Map {
 		LockedInventory.add(new Item ("unstapled assignment", "", "usable", true, 2, 0, 0));
 		LockedInventory.add(new Item ("locker code", "", "usable", true, 2, 0, 0));
 		LockedInventory.add(new Item ("charger", "", "usable", true, 2, 0, 0));
-		LockedInventory.add(new Item (""
-				+ "", "", "usable", true, 2, 0, 0));
+		LockedInventory.add(new Item ("", "", "usable", true, 2, 0, 0));
 	}
 	// Don't need it
 	public void printMap() {

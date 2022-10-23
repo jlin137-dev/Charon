@@ -26,12 +26,14 @@ public class Story {
 				+ "\nThen, you realize you forgot your locker password"
 				+"\nBut you remember you stored it on your phone at least…");
 		//Oval
-		storyLocations.put("4, 0, 0", "You arrive at the courtyard to search for a charger \n "
+		storyLocations.put("4, 0, 0", "Have you found your charger yet?");
+		storyLocations.put("4, 0, 1", "You arrive at the courtyard to search for a charger \n "
 				+ "Just then, someone from soccer training across the road kicks a soccer ball past your head \n"
 				+ "It lands on the oval \n"
 				+ "Bang!\n"
 				+ "A mine explodes, and sends you flying backwards\n"
-				+ "It seems like the school mined the oval… You're going to have to un-mine the oval to find the charger...");
+				+ "It seems like the school mined the oval… You're going to have to un-mine the oval to find the charger..."
+				+ "\n Move south to start minesweeper");
 		//
 		storyLocations.put("5, 0, 0", null);
 		
