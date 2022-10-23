@@ -79,7 +79,7 @@ public class Player {
 			System.out.println("60% of your english grade goes down the drain");
 			System.out.println("Game over");
 			gameFinished = true;
-			EnglishSubmitted = false;
+			alive = false;
 		}
 		
 		if (game.Map.currentLevel == 4 && playerLocation[1] == 2) {
