@@ -24,7 +24,6 @@ public class Player {
 	// Game loop
 	public boolean alive = true;
 	public boolean gameFinished = false;
-	public boolean EnglishSubmitted = true; // game finished, english submitted to win, game finisged, english not submitted, lose
 	
 	public static String TurnTime () {
 		int NumTurn = turn;

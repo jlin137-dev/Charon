@@ -27,7 +27,7 @@ public class Gamemain {
         TextAnimation.StatusBar(player.name);
 		System.out.println("You've entered L block, and need to look for that printer.\nType 'help' if you're stuck");
 		// Game loop
-		while (player.alive || (player.gameFinished) == false) {
+		while (player.alive || !(player.gameFinished)) {
 			player.action();
 			//story.readStory(player.playerLevel,player.playerLocation[0],player.playerLocation[1]);
 			//debugging
@@ -39,7 +39,7 @@ public class Gamemain {
 			}
 		}
 		scanner.close();
-		if (player.EnglishSubmitted == false) {
+		if (player.alive == false) {
 			System.out.println("Yes, 60% of your english grade really did go down the drain");
 			System.out.println("Welcome to QA~!  ?");
 			System.out.println("Game over");
