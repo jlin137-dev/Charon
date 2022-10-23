@@ -31,7 +31,6 @@ public class Player {
 
 	
 	public void action() {
-		
 		boolean movementUnlocked = true;
 		if (game.Map.currentLevel == 1 && map.jblockUnlocked == false) {
 				movementUnlocked = false;
@@ -53,12 +52,15 @@ public class Player {
 		input = scanner.nextLine().trim();
 		// Split commands by space
 		String[] commands = input.split("\\s+");
-		//test print
 		//Check for the action
 		if (commands.length > 1) {
 			TextAnimation.StatusBar(name);	//show status bar
 			if (commands[1] != null) {
 				String item = "";
+				for(int i = 1; i < commands.length - 1; i++) {
+					item = item + commands[i] + " ";
+				}
+				item = item + commands[commands.length - 1];
 				switch(commands[0].toLowerCase()) {
 				// Movement
 				// TODO add they can enter wasd and it moves
@@ -68,33 +70,29 @@ public class Player {
 				case "travel":
 					// Need to fix so player can't go out of bounds (working on rn)
 					if (movementUnlocked == true) {
-						if(commands[1].toLowerCase().equals("east")) { 
+						if(item.toLowerCase().equals("east")) { 
 							movement(1, 0);
 							}
-						else if (commands[1].toLowerCase().equals("west")) {
+						else if (item.toLowerCase().equals("west")) {
 							movement(-1, 0);
 							}
-						else if (commands[1].toLowerCase().equals("north")) {
+						else if (item.toLowerCase().equals("north")) {
 							movement(0, -1);
 							}
-						else if (commands[1].toLowerCase().equals("south")) {
+						else if (item.toLowerCase().equals("south")) {
 							movement(0, 1);
 							}
 						else {
-							System.out.println("You can't go " + commands[1]);
+							System.out.println("You can't go '" + item + "', only north, south, east or west.");
 						}
 						
 					}
 					else {
-						System.out.println("The room is locked...\n walking into walls wont help you with English?");
+						System.out.println("You bump into a locked door. Be glad no one's here, you looked very stupid doing that.");
 					}
 					break;
 				case "grab":
 					if (movementUnlocked == true) {
-					for(int i = 1; i < commands.length - 1; i++) {
-						item = item + commands[i] + " ";
-					}
-					item = item + commands[commands.length - 1];
 					if (map.returnInventory().in(item)) {
 						System.out.println("You grab " + item + " from the ground and put it in your inventory.");
 						inventory.add(map.returnInventory().get(item));
@@ -102,32 +100,25 @@ public class Player {
 						map.remove(commands[1]);
 						turn++;
 					} else {
-						System.out.println("You can't grab " + commands[1] + " out of thin air.");
+						System.out.println("You can't grab '" + item + "' out of thin air.");
 					}
 					} else {
 						System.out.println("The room is locked. Read the instructions again");
 					}
 					break;
-				case "drop":
-					if (inventory.in(commands[1])) {
-						System.out.println("You drop " + commands[1] + " on to the ground.");
+				case "drop":	//Drop the item from player inventory to level inventory
+					if (inventory.in(item)) {
+						System.out.println("You drop '" + item + "' on to the ground.");
 						// TODO pass Item object in instead of by name
-						map.addToRoom(inventory.get(commands[1]));
-						inventory.remove(commands[1]);
+						map.addToRoom(inventory.get(item));
+						inventory.remove(item);
 					}else {
-						System.out.println("You can't drop " + commands[1]+ ", you don't have it.");
+						System.out.println("You can't drop '" + item+ "', you don't have it.");
 					}
 					
 					break;
-				
-				case "use":
-					for(int i = 1; i < commands.length - 1; i++) {
-						item = item + commands[i] + " ";
-					}
-					item = item + commands[commands.length - 1];
+				case "use":		// Check if the item exists in the player inventory
 					Use.use(item, map);
-					// Check if the item exists in the player inventory
-					// Fix if player has nothing error
 					break;
 				case "start":
 					if(commands[1].equals("minesweeper")) {
@@ -141,7 +132,7 @@ public class Player {
 					}
 					break;
 				default:
-					System.out.println("You can't do " + commands[0]);
+					System.out.println("You can't do '" + String.join(" ", commands) + "'");
 					break;
 				}
 			}
