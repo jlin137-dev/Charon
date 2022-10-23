@@ -24,7 +24,36 @@ public class Player {
 	// Game loop
 	public boolean alive = true;
 	public boolean gameFinished = false;
-	public boolean EnglishSubmitted; // game finished, english submitted to win, game finisged, english not submitted, lose
+	public boolean EnglishSubmitted = true; // game finished, english submitted to win, game finisged, english not submitted, lose
+	
+	public static String TurnTime () {
+		int NumTurn = turn;
+		int timer = NumTurn;
+		boolean MoreThanEight = false;
+		String returnVal = "";
+		if (NumTurn < 60) {
+			timer = NumTurn;
+		} else {
+			timer = NumTurn - 60;
+			MoreThanEight = true;
+		}
+		
+		if (MoreThanEight == false) {
+			if (timer < 10) {
+				returnVal = "7:0"+timer;
+			} else {
+				returnVal = "7:"+timer;
+			}
+		} else if (MoreThanEight == true) {
+			if (timer < 10) {
+				returnVal = "8:0"+timer;
+			} else {
+				returnVal = "8:"+timer;
+			}
+		}
+		
+		return returnVal;
+	}
 	
 	public Player(){
 		story.init();
@@ -42,7 +71,7 @@ public class Player {
 		else {
 			movementUnlocked = true;
 		}
-		if (turn > 60) {
+		if (turn > 90) {
 			System.out.println("The clock outside strikes 8:30");
 			System.out.println("Your assignment is overdue");
 			System.out.println("60% of your english grade goes down the drain");
@@ -107,7 +136,7 @@ public class Player {
 						inventory.add(map.returnInventory().get(item));
 						// TODO remove from ground
 						map.remove(commands[1]);
-						turn+=29;
+						turn++;
 					} else {
 						System.out.println("You can't grab '" + item + "' out of thin air.");
 					}

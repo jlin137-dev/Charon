@@ -41,7 +41,7 @@ public class Gamemain {
 		scanner.close();
 		if (player.EnglishSubmitted == false) {
 			System.out.println("Yes, 60% of your english grade really did go down the drain");
-			System.out.println("Welcome to QA~!");
+			System.out.println("Welcome to QA~!  ?");
 			System.out.println("Game over");
 		}
 		else {
