@@ -182,7 +182,13 @@ public class Player {
 						System.out.println("This is a debug command");
 						try {
 							new MineSweeperMain();
-							game.MineSweeperMain.mineSweeper(Integer.parseInt(commands[2]), Integer.parseInt(commands[3]), Integer.parseInt(commands[4]));
+							if (game.MineSweeperMain.mineSweeper(Integer.parseInt(commands[2]), Integer.parseInt(commands[3]), Integer.parseInt(commands[4]))) {
+								System.out.println("Nice you have deleted all the mines. You see your charger which somehow has survived the field and grab it.");
+							}
+							// TODO add cahrger
+							inventory.add(new Item("charger", "lpt", "off", true, 99, 0, 0));
+							new MineSweeperMain();
+							
 						} catch (Exception e) {
 							System.out.println("L wrong format.\nstart minesweeper WIDTH HEIGHT MINES_COUNT");
 						}

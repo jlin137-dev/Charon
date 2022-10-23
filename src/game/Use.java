@@ -34,7 +34,7 @@ public class Use {
 			case "j block key":
 				map.jblockUnlocked = true;
 				System.out.println("You use J block Key to unlock J Block");
-				Player.turn ++;
+				Player.turn++;
 				break;
 			case "locker code":
 				System.out.println("You type the locker code... The locker unlocks");

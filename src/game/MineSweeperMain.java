@@ -218,7 +218,7 @@ public class MineSweeperMain {
 				}
 			}
 			if(minesFound == minesTotal && mines == 0) {
-				scanner.close();
+				//scanner.close();
 				printMap(x, y);
 				System.out.println("You finally flag out the last mine, and you see your charger.");
 				return true;
