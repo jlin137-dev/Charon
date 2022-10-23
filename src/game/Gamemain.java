@@ -1,5 +1,4 @@
 package game;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Gamemain {
@@ -13,8 +12,7 @@ public class Gamemain {
 		//TextAnimation.LoadingBar(5000);																//Show loading bar
 		System.out.println("\nHello Adventurer what is your name? ");
 		player.name = scanner.nextLine().trim();
-		if(player.name == ""||player.name == null) player.name = "student"
-				+ "";
+		if(player.name == ""||player.name == null) player.name = "student";
 		System.out.println("Welcome, " + player.name + ", to the land of QASMT.");
 		// Init the locations and story
 		//story story = new story();

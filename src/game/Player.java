@@ -147,14 +147,13 @@ public class Player {
 				System.out.println(
 						"Go print that English assignment! 60% of your term grade is on the line."
 						+ "\nFull list of avalible commands:"
-						+ "\n\t* Go + [NESW]: Allows you to move within the level, up being north"
-						+ "\n\t* Up/ Down: Allows you to move across levels, like in a skyscraper"
-						+ "\n\t* Grab + [ITEM]: Picks up the item and put it in your inventory"
-						+ "\n\t* Use + [ITEM]: Use an item in your inventory. This may get rid of"
-						+ "\n\tanother item in your inventory"
-						+ "\n\t* Inventory: Check your inventory"
-						+ "\n\t* Look: Look around the room"
-						+ "\n\t* Drop + [ITEM]: Remove an item from your inventory"			
+						+ "\nGo [NESW]	Allows you to move within the level, up being north."
+						+ "\nUp/Down		Allows you to move across levels, like in a skyscraper."
+						+ "\nGrab [ITEM]	Picks up the item and put it in your inventory."
+						+ "\nUse [ITEM]	Use an item in your inventory. Items can be single use."
+						+ "\nInventory	Check your inventory."
+						+ "\nLook		Look around the room."
+						+ "\nDrop [ITEM]	Remove an item from your inventory."			
 						);
 				break;
 			case "look":
@@ -216,7 +215,7 @@ public class Player {
 				break;
 			case "debug": 
 				Gamemain.debug = !Gamemain.debug;
-				System.out.println(Gamemain.debug);
+				System.out.println("Debug: " + Gamemain.debug);
 				break;
 			default:
 				System.out.println("I don't know what " + commands[0]+ " means.");
