@@ -140,6 +140,7 @@ public class Player {
 						System.out.println("You bump into a locked door. Be glad no one's here, you looked very stupid doing that.");
 					}
 					break;
+				case "pickup":
 				case "grab":
 					if (movementUnlocked == true) {
 					if (map.returnInventory().in(item)) {
