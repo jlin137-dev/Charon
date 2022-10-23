@@ -218,6 +218,10 @@ public class Map {
 		}
 	}
 	
+	public Inventory returnLockedInventory () {
+		return LockedInventory;
+	}
+	
 	public void addToRoom(Item item) {
 		switch(currentLevel) {
 			case 0:

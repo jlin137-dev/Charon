@@ -46,7 +46,7 @@ public class Use {
 				switch(printer.state(null)) {
 					case "on":
 						if (inventory.in("paper") && inventory.in("laptop") && inventory.get("laptop").state(null) == "on") {
-								inventory.add(map.returnInventory().get("unstapled assignment"));
+								inventory.add(map.returnLockedInventory().get("unstapled assignment"));
 								System.out.println("You load in your paper and press print...");
 								System.out.println("The printer prints your assignment for you");
 								System.out.println("Please use stapler to staple assignment. Oh wait you have no stapler on you");
@@ -110,7 +110,7 @@ public class Use {
 				if (inventory.in("unstapled assignment")) {
 					System.out.println("You staple your assignment");
 					System.out.println("There, a printed, stapled assignment read for submission");
-					inventory.add(map.returnInventory().get("stapled essay"));
+					inventory.add(map.returnLockedInventory().get("stapled essay"));
 				}
 				else {
 					System.out.println("You don't have the printed assignment to staple");
@@ -118,6 +118,18 @@ public class Use {
 				}
 				Player.turn ++;
 				break;
+			
+			case "charger":
+				if (inventory.in("phone") && inventory.get("phone").state(null) == "charged") {
+					System.out.println("You connect to the nearest power station, and charge up your phone");
+					System.out.println("It takes a while before your phone turns on");
+					System.out.println("But there, your phone can be used now!");
+					turn += 5;
+					inventory.get("phone").state("charged");
+				} else {
+					System.out.println("Where is your phone?");
+					System.out.println("Have you taken it out of your bag? Use it to take it out of your bad");
+				}
 		
 			//Call and command or something
 		}}else {

@@ -87,7 +87,7 @@ public class Player {
 			System.out.println("The oval is unmined. You dig around for a bit, and find your charger!");
 			System.out.println("You leave the oval, and lock the door to its entrance");
 			map.OvalCleared = true;
-			inventory.add(map.returnInventory().get("charger"));
+			inventory.add(map.returnLockedInventory().get("charger"));
 			playerLocation[1] = 0;
 		}
 		
