@@ -187,6 +187,18 @@ public class Player {
 			}
 		}else {
 			switch(commands[0].toLowerCase()) {
+			case "east":
+				movement(1,0);
+				break;
+			case "west":
+				movement(-1,0);
+				break;
+			case "north":
+				movement(0,1);
+				break;
+			case "south":
+				movement(0,-1);
+				break;
 			case "inventory":
 				TextAnimation.StatusBar(name);	//show status bar
 				System.out.println("Inventory: " + Arrays.toString(inventory.returnContents()));
