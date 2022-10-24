@@ -13,7 +13,7 @@ public class Story {
 				// Leave empty if there is nothing storyLocations.put("0 1 0", "");
 		
 		// J block
-		storyLocations.put("1, 0, 0", "You arrive outside J block. You look around, but the door is locked. \n Student service at A block won't be open this early, right?");
+		storyLocations.put("1, 0, 0", "You arrive outside J block.  \n Student service at A block won't be open this early, right?");
 		storyLocations.put("1, 0, 1", "You arrive outside J block, and use your key to open the door. \n the door unlocks \n you see papers on a desk");
 		// A block
 		storyLocations.put("2, 0, 0", "You arrive at the reception gate. No one is inside. But the sliding door opens \n"
@@ -23,7 +23,7 @@ public class Story {
 		// Lockers
 		storyLocations.put("3, 0, 0", "You run back to your locker on the other side of the school"
 				+ "\nYou find 3 identical lockers… which one is your locker?"
-				+ "\nThen, you realize you forgot your locker password"
+				+ "\nWhats your locker password?"
 				+"\nBut you remember you stored it on your phone at least…");
 		//Oval
 		storyLocations.put("4, 0, 0", "Have you found your charger yet?");

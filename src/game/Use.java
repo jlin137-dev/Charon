@@ -29,6 +29,7 @@ public class Use {
 					System.out.println("If you see this message someone messed up the spelling and now the game is broken.\nHopefully you're not Mr Venz");
 					break;
 				}
+				Player.turn ++;
 				laptop.use();
 				break;
 			case "j block key":
@@ -95,6 +96,8 @@ public class Use {
 					switch (phone.state(null)) {
 					case "uncharged":
 						System.out.println("You try to open your phone. It has no charge");
+						System.out.println("A while back, your put a charger in the middle of the oval to hide it\n"
+								+ "It wouldn't be hard to find it right?");
 						break;
 					case "charged":
 						System.out.println("You turn on your phone, and search for the locker password");
@@ -102,6 +105,7 @@ public class Use {
 						System.out.println("Now you can get the stapler!");
 						inventory.add(map.returnLockedInventory().get("locker code"));
 					}
+					Player.turn++;
 					break;
 				
 				case "circuit boards":
