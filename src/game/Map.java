@@ -132,6 +132,7 @@ public class Map {
 		LockedInventory.add(new Item ("unstapled assignment", "", "usable", true, 2, 0, 0));
 		LockedInventory.add(new Item ("locker code", "", "usable", true, 2, 0, 0));
 		LockedInventory.add(new Item ("charger", "", "usable", true, 2, 0, 0));
+		LockedInventory.add(new Item ("stapled essay", "", "usable", true, 2, 0, 0));
 		LockedInventory.add(new Item ("", "", "usable", true, 2, 0, 0));
 	}
 	// Don't need it

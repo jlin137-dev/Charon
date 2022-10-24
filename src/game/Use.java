@@ -90,7 +90,19 @@ public class Use {
 				}
 				break;
 					
-
+				case "phone":
+					Item phone = inventory.get("phone");
+					switch (phone.state(null)) {
+					case "uncharged":
+						System.out.println("You try to open your phone. It has no charge");
+						break;
+					case "charged":
+						System.out.println("You turn on your phone, and search for the locker password");
+						System.out.println("You find the password");
+						System.out.println("Now you can get the stapler!");
+						inventory.add(map.returnLockedInventory().get("locker code"));
+					}
+					break;
 				
 				case "circuit boards":
 					System.out.println("Ouuuuuuch..........");
@@ -98,7 +110,7 @@ public class Use {
 					System.out.println("You wake up... did you electrute yourself?");
 					System.out.println("You realise you just wasted half an hour");
 					Player.turn += 30;
-				break;
+					break;
 				
 			case "test":
 				Item test = inventory.get("test");
@@ -110,6 +122,7 @@ public class Use {
 				if (inventory.in("unstapled assignment")) {
 					System.out.println("You staple your assignment");
 					System.out.println("There, a printed, stapled assignment read for submission");
+					System.out.println("Remember, submit your essay in J block. Use your essay to submit it");
 					inventory.add(map.returnLockedInventory().get("stapled essay"));
 				}
 				else {
@@ -120,7 +133,7 @@ public class Use {
 				break;
 			
 			case "charger":
-				if (inventory.in("phone") && inventory.get("phone").state(null) == "charged") {
+				if (inventory.in("phone") && inventory.get("phone").state(null) == "uncharged") {
 					System.out.println("You connect to the nearest power station, and charge up your phone");
 					System.out.println("It takes a while before your phone turns on");
 					System.out.println("But there, your phone can be used now!");
@@ -130,6 +143,17 @@ public class Use {
 					System.out.println("Where is your phone?");
 					System.out.println("Have you taken it out of your bag? Use it to take it out of your bad");
 				}
+				break;
+			
+			case "stapled essay":
+				if (game.Map.currentLevel == 1) {
+					System.out.println("You rush in, and submit your assignment!");
+					Player.gameFinished = true;
+				}
+				else {
+					System.out.println("You need to submit your english essay in J block, or its not getting marked");
+				}
+				break;
 		
 			//Call and command or something
 		}}else {

@@ -23,7 +23,7 @@ public class Player {
 	// I'm sure you can figure out what these mean
 	// Game loop
 	public boolean alive = true;
-	public boolean gameFinished = false;
+	public static boolean gameFinished = false;
 	
 	public static String TurnTime () {
 		int NumTurn = turn;
