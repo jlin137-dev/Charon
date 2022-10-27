@@ -137,9 +137,9 @@ public class MineSweeperMain {
 						coords = input[1].split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");		//Split into letters and numbers
 						if((coords.length == 2)) {												//filter out any junk command
 							int InputX = alphabet.indexOf(coords[0].toUpperCase()) + 1;
-							if(InputX <= 0 || InputX > x) throw new Exception("X coordinate not within range!");
+							if(InputX <= 0 || InputX > x) {System.out.println("X coordinate not within range!"); break;}
 							int InputY = Integer.parseInt(coords[1]);
-							if(InputY <= 0 || InputY > y) throw new Exception("Y coordinate not within range!");
+							if(InputY <= 0 || InputY > y) {System.out.println("Y coordinate not within range!"); break;}
 							
 							System.out.println("X: "  + InputX + "; Y: " + InputY);
 							String[] yRow = mapShow.get(y - InputY).split("");
@@ -162,9 +162,9 @@ public class MineSweeperMain {
 						coords = input[1].split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");		//Split into letters and numbers
 						if((coords.length == 2)) {												//filter out any junk command
 							int InputX = alphabet.indexOf(coords[0].toUpperCase()) + 1;
-							if(InputX <= 0 || InputX > x) throw new Exception("X coordinate not within range!");
+							if(InputX <= 0 || InputX > x) {System.out.println("X coordinate not within range!"); break;}
 							int InputY = Integer.parseInt(coords[1]);
-							if(InputY <= 0 || InputY > y) throw new Exception("Y coordinate not within range!");
+							if(InputY <= 0 || InputY > y) {System.out.println("Y coordinate not within range!"); break;}
 							
 							System.out.println("X: "  + InputX + "; Y: " + InputY);
 							String[] yRow = mapShow.get(y - InputY).split("");
@@ -189,9 +189,9 @@ public class MineSweeperMain {
 						coords = input[0].split("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)");		//Split into letters and numbers
 						if((coords.length == 2)) {												//filter out any junk command
 							int InputX = alphabet.indexOf(coords[0].toUpperCase()) + 1;
-							if(InputX <= 0 || InputX > x) throw new Exception("X coordinate not within range!");
+							if(InputX <= 0 || InputX > x) {System.out.println("X coordinate not within range!"); break;}
 							int InputY = Integer.parseInt(coords[1]);
-							if(InputY <= 0 || InputY > y) throw new Exception("Y coordinate not within range!");
+							if(InputY <= 0 || InputY > y) {System.out.println("Y coordinate not within range!"); break;}
 							
 							System.out.println("X: "  + InputX + "; Y: " + InputY);
 							number = map.get(y - InputY).split("")[InputX * 2 - 1];
@@ -204,6 +204,7 @@ public class MineSweeperMain {
 //							System.out.println("number: " + number);
 							movesCount++;
 							if(number.equals(mineChar)) {
+								System.out.println(String.join("", map));
 								System.out.println("You exploded on a mine! Wait a minute, why am I \nstill alive... And why did everything reset?\nPress ENTER to restart.");
 								TextAnimation.EnterReturn();
 								return mineSweeper(x, y, mines);
@@ -228,19 +229,18 @@ public class MineSweeperMain {
 	}
 	//map printing
 	public static void printMap(int x, int y) {
-		@SuppressWarnings("unchecked")
-		ArrayList<String> mapShowCoords = (ArrayList<String>) mapShow.clone();
+		ArrayList<String> mapShowCoords = (ArrayList<String>) mapShow.clone(); //clone new array list for a map with coordinates
 		//vertical coordinates
-		for(int i = 0; i < y; i++) {
-			String newString = (y - i) + mapShowCoords.get(i);
+		for(int i = 0; i < y; i++) {									//for every row
+			String newString = (y - i) + mapShowCoords.get(i);			//add number to the start of every row
 			mapShowCoords.set(i, newString);
 		}
 		//horizontal
 		String horizontal = " ";
 		for (int i = 0; i < x; i++) {
-			horizontal = horizontal + " " + alphabet.substring(i, i+1);
+			horizontal = horizontal + " " + alphabet.substring(i, i+1);	//add letter to every column, find it in alphabet array
 		}
 		mapShowCoords.add(horizontal);
-		System.out.println(String.join("", mapShowCoords));
+		System.out.println(String.join("", mapShowCoords));			//print full map
 	}
 }

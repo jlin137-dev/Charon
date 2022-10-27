@@ -16,6 +16,7 @@ public class Player {
 	// I'm sure you can figure out what these mean
 	public int playerLevel = 0;
 	public int[] playerLocation = {0,0};
+	public static String[] blocks = {"L Block", "J Block", "A Block", "Locker ", "Oval   "};
 	
 	public static Inventory inventory = new Inventory(false);
 	
@@ -26,32 +27,12 @@ public class Player {
 	public boolean gameFinished = false;
 	
 	public static String TurnTime () {
-		int NumTurn = turn;
-		int timer = NumTurn;
-		boolean MoreThanEight = false;
-		String returnVal = "";
-		if (NumTurn < 60) {
-			timer = NumTurn;
+		int min = turn % 60;
+		if(min > 9) {
+			return turn/60 + 7 + ":" + min;
 		} else {
-			timer = NumTurn - 60;
-			MoreThanEight = true;
+			return turn/60 + 7 + ":0" + min;
 		}
-		
-		if (MoreThanEight == false) {
-			if (timer < 10) {
-				returnVal = "7:0"+timer;
-			} else {
-				returnVal = "7:"+timer;
-			}
-		} else if (MoreThanEight == true) {
-			if (timer < 10) {
-				returnVal = "8:0"+timer;
-			} else {
-				returnVal = "8:"+timer;
-			}
-		}
-		
-		return returnVal;
 	}
 	
 	public Player(){
@@ -73,13 +54,10 @@ public class Player {
 		else {
 			movementUnlocked = true;
 		}
-		if (turn > 90) {
-			System.out.println("The clock outside strikes 8:30");
-			System.out.println("Your assignment is overdue");
-			System.out.println("60% of your english grade goes down the drain");
-			System.out.println("Game over");
+		if (turn > 89) {
 			gameFinished = true;
 			alive = false;
+			return;
 		}
 		
 		if (game.Map.currentLevel == 4 && playerLocation[1] == 2) {
@@ -92,6 +70,7 @@ public class Player {
 		}
 		
 		// Read what is happening
+		System.out.println("");
 		story.readStory(game.Map.currentLevel, playerLocation[0], playerLocation[1]);
 		//Getting user input
 		Scanner scanner = new Scanner(System.in);
@@ -103,11 +82,11 @@ public class Player {
 		String[] commands = input.split("\\s+");
 		//Check for the action
 		if (commands.length > 1) {
-			TextAnimation.StatusBar(name);	//show status bar
 			if (commands[1] != null) {
 				String item = "";
 				for(int i = 1; i < commands.length - 1; i++) {
 					item = item + commands[i] + " ";
+					item = item.toLowerCase();
 				}
 				item = item + commands[commands.length - 1];
 				switch(commands[0].toLowerCase()) {
@@ -117,6 +96,7 @@ public class Player {
 				case "run":
 				case "walk":
 				case "travel":
+					TextAnimation.StatusBar(name);	//show status bar
 					// Need to fix so player can't go out of bounds (working on rn)
 					if (movementUnlocked == true) {
 						if(item.toLowerCase().equals("east")) { 
@@ -142,14 +122,15 @@ public class Player {
 					break;
 				case "pickup":
 				case "grab":
+					TextAnimation.StatusBar(name);	//show status bar
 					if (movementUnlocked == true) {
 					if (map.returnInventory().in(item)) {
 						System.out.println("You grab " + item + " from the ground and put it in your inventory.");
 						inventory.add(map.returnInventory().get(item));
 						map.remove(commands[1]);
 						turn++;
-					} else if(item.toLowerCase().equals("all")) {
-						System.out.println("You grab everything from the room. But something maybe left so double check.");
+					} else if(item.equals("all")) {
+						System.out.println("You grab everything what you can from the room. Key words \"...what you can.\"");
 						for (int i = 0; i < map.returnContents().length; i++) {
 							inventory.add(map.returnInventory().get(i));
 							map.remove(map.returnContents()[i]);
@@ -164,6 +145,7 @@ public class Player {
 					}
 					break;
 				case "drop":	//Drop the item from player inventory to level inventory
+					TextAnimation.StatusBar(name);	//show status bar
 					if (inventory.in(item)) {
 						System.out.println("You drop '" + item + "' on to the ground.");
 						// TODO pass Item object in instead of by name
@@ -175,6 +157,7 @@ public class Player {
 					
 					break;
 				case "use":		// Check if the item exists in the player inventory
+					TextAnimation.StatusBar(name);	//show status bar
 					Use.use(item, map);
 					break;
 				case "start":
@@ -194,6 +177,14 @@ public class Player {
 						}
 					}
 					break;
+				case "waste":
+				case "sleep":
+					if(!(item.matches("\\d+"))) {System.out.println("'" + item + "' isn't a number..."); break;}
+					turn = turn + Integer.parseInt(item);
+					if(turn > 90) turn = 91;
+					TextAnimation.StatusBar(name);	//show status bar
+					System.out.println("You just wasted " + item + " minutes... don't understand what that achieved.");
+					break;
 				default:
 					System.out.println("You can't do '" + String.join(" ", commands) + "'");
 					break;
@@ -202,16 +193,20 @@ public class Player {
 		}else {
 			switch(commands[0].toLowerCase()) {
 			case "east":
+			case "d":
 				movement(1,0);
 				break;
 			case "west":
+			case "a":
 				movement(-1,0);
 				break;
 			case "north":
-				movement(0,1);
+			case "w":
+				movement(0,-1);
 				break;
 			case "south":
-				movement(0,-1);
+			case "s":
+				movement(0,1);
 				break;
 			case "inventory":
 				TextAnimation.StatusBar(name);	//show status bar
@@ -223,6 +218,7 @@ public class Player {
 						"Go print that English assignment! 60% of your term grade is on the line."
 						+ "\nFull list of avalible commands:"
 						+ "\nGo [NESW]	Allows you to move within the level, up being north."
+						+ "\n[WASD]/[NESW]	Same thing as 'go [NESW]'"
 						+ "\nUp/Down		Allows you to move across levels, like in a skyscraper."
 						+ "\nGrab [ITEM]	Picks up the item and put it in your inventory."
 						+ "\nUse [ITEM]	Use an item in your inventory. Items can be single use."
@@ -267,7 +263,7 @@ public class Player {
 				map.jblockUnlocked = false;
 				map.jblockUnlocked = false;
 				System.out.println("You lock all doors behind you");
-				System.out.println("You moved up a level to " + game.Map.currentLevel);
+				System.out.println("You moved up a level to " + blocks[game.Map.currentLevel]);
 				break;
 			case "down":
 				if (game.Map.currentLevel > 0) {
@@ -289,7 +285,7 @@ public class Player {
 					map.jblockUnlocked = false;
 					map.jblockUnlocked = false;
 					System.out.println("You lock all doors behind you");
-					System.out.println("You moved down a level to " + game.Map.currentLevel);
+					System.out.println("You moved down a level to " + blocks[game.Map.currentLevel]);
 				}else {
 					System.out.println("You can't go down you're not a miner.");
 				}
