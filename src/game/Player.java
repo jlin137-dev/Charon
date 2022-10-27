@@ -24,7 +24,7 @@ public class Player {
 	// I'm sure you can figure out what these mean
 	// Game loop
 	public boolean alive = true;
-	public boolean gameFinished = false;
+	public static boolean gameFinished = false;
 	
 	public static String TurnTime () {
 		int min = turn % 60;
@@ -65,7 +65,8 @@ public class Player {
 			System.out.println("The oval is unmined. You dig around for a bit, and find your charger!");
 			System.out.println("You leave the oval, and lock the door to its entrance");
 			map.OvalCleared = true;
-			inventory.add(map.returnInventory().get("charger"));
+			turn += 25 * (MineSweeperMain.attemptCount - 1);
+			inventory.add(map.returnLockedInventory().get("charger"));
 			playerLocation[1] = 0;
 		}
 		
@@ -134,6 +135,7 @@ public class Player {
 						for (int i = 0; i < map.returnContents().length; i++) {
 							inventory.add(map.returnInventory().get(i));
 							map.remove(map.returnContents()[i]);
+							turn ++;
 						}
 						inventory.add(map.returnInventory().get(item));
 					}

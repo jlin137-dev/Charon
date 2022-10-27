@@ -29,6 +29,7 @@ public class Use {
 					System.out.println("If you see this message someone messed up the spelling and now the game is broken.\nHopefully you're not Mr Venz");
 					break;
 				}
+				Player.turn ++;
 				laptop.use();
 				break;
 			case "j block key":
@@ -46,7 +47,7 @@ public class Use {
 				switch(printer.state(null)) {
 					case "on":
 						if (inventory.in("paper") && inventory.in("laptop") && inventory.get("laptop").state(null) == "on") {
-								inventory.add(map.returnInventory().get("unstapled assignment"));
+								inventory.add(map.returnLockedInventory().get("unstapled assignment"));
 								System.out.println("You load in your paper and press print...");
 								System.out.println("The printer prints your assignment for you");
 								System.out.println("Please use stapler to staple assignment. Oh wait you have no stapler on you");
@@ -90,7 +91,22 @@ public class Use {
 				}
 				break;
 					
-
+				case "phone":
+					Item phone = inventory.get("phone");
+					switch (phone.state(null)) {
+					case "uncharged":
+						System.out.println("You try to open your phone. It has no charge");
+						System.out.println("A while back, your put a charger in the middle of the oval to hide it\n"
+								+ "It wouldn't be hard to find it right?");
+						break;
+					case "charged":
+						System.out.println("You turn on your phone, and search for the locker password");
+						System.out.println("You find the password");
+						System.out.println("Now you can get the stapler!");
+						inventory.add(map.returnLockedInventory().get("locker code"));
+					}
+					Player.turn++;
+					break;
 				
 				case "circuit boards":
 					System.out.println("Ouuuuuuch..........");
@@ -98,7 +114,7 @@ public class Use {
 					System.out.println("You wake up... did you electrute yourself?");
 					System.out.println("You realise you just wasted half an hour");
 					Player.turn += 30;
-				break;
+					break;
 				
 			case "test":
 				Item test = inventory.get("test");
@@ -110,13 +126,37 @@ public class Use {
 				if (inventory.in("unstapled assignment")) {
 					System.out.println("You staple your assignment");
 					System.out.println("There, a printed, stapled assignment read for submission");
-					inventory.add(map.returnInventory().get("stapled essay"));
+					System.out.println("Remember, submit your essay in J block. Use your essay to submit it");
+					inventory.add(map.returnLockedInventory().get("stapled essay"));
 				}
 				else {
 					System.out.println("You don't have the printed assignment to staple");
 					System.out.println("You waste 1 of your 2 precious staples");
 				}
 				Player.turn ++;
+				break;
+			
+			case "charger":
+				if (inventory.in("phone") && inventory.get("phone").state(null) == "uncharged") {
+					System.out.println("You connect to the nearest power station, and charge up your phone");
+					System.out.println("It takes a while before your phone turns on");
+					System.out.println("But there, your phone can be used now!");
+					turn += 5;
+					inventory.get("phone").state("charged");
+				} else {
+					System.out.println("Where is your phone?");
+					System.out.println("Have you taken it out of your bag? Use it to take it out of your bad");
+				}
+				break;
+			
+			case "stapled essay":
+				if (game.Map.currentLevel == 1) {
+					System.out.println("You rush in, and submit your assignment!");
+					Player.gameFinished = true;
+				}
+				else {
+					System.out.println("You need to submit your english essay in J block, or its not getting marked");
+				}
 				break;
 		
 			//Call and command or something
